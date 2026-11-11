@@ -39,23 +39,37 @@ Designed for AgentSkills-compatible coding agents without IDE-locked tool constr
 
 ## Installation
 
-Copy or clone this repository into your agent's global or project-level skills directory so the skill folder is named `readme-generator`.
+### Via Skills CLI (Recommended)
+
+Install directly from GitHub using [`skills`](https://skills.sh/):
+
+```bash
+# Project-level installation (interactive)
+npx skills add dexter826/readme-generator
+
+# Global installation (skip confirmation prompts)
+npx skills add dexter826/readme-generator -g -y
+```
+
+### Manual Installation
+
+Clone or copy this repository into your agent's global or project-level skills directory so the skill folder is named `readme-generator`:
 
 ```bash
 # Project-level installation (shared via repository)
 mkdir -p .agents/skills
-cp -r path/to/readme-generator .agents/skills/readme-generator
+git clone https://github.com/dexter826/readme-generator.git .agents/skills/readme-generator
 
 # Global installation on Unix/macOS (shared cross-runtime path)
 mkdir -p ~/.agents/skills
-cp -r path/to/readme-generator ~/.agents/skills/readme-generator
+git clone https://github.com/dexter826/readme-generator.git ~/.agents/skills/readme-generator
 ```
 
 On Windows PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$HOME\.agents\skills" | Out-Null
-Copy-Item -Recurse -Force "path\to\readme-generator" "$HOME\.agents\skills\readme-generator"
+git clone https://github.com/dexter826/readme-generator.git "$HOME\.agents\skills\readme-generator"
 ```
 
 ## Usage
