@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="SKILL.md"><img src="https://img.shields.io/badge/standard-AgentSkill-00cc5c?style=flat-square&labelColor=0a0a0a" alt="standard: AgentSkill" /></a>
-  <a href="references/writing-and-style.md"><img src="https://img.shields.io/badge/languages-VI%20%7C%20EN-00cc5c?style=flat-square&labelColor=0a0a0a" alt="languages: VI | EN" /></a>
+  <a href="skills/readme-generator/SKILL.md"><img src="https://img.shields.io/badge/standard-AgentSkill-00cc5c?style=flat-square&labelColor=0a0a0a" alt="standard: AgentSkill" /></a>
+  <a href="skills/readme-generator/references/writing-and-style.md"><img src="https://img.shields.io/badge/languages-VI%20%7C%20EN-00cc5c?style=flat-square&labelColor=0a0a0a" alt="languages: VI | EN" /></a>
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.0.0-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.0.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-00cc5c?style=flat-square&labelColor=0a0a0a" alt="license: MIT" /></a>
 </p>
@@ -56,25 +56,31 @@ npx skills add dexter826/readme-generator -g -y
 
 ### Manual Installation
 
-Clone this repository into your agent's skills directory so the folder is named `readme-generator`.
+Copy only the [`skills/readme-generator`](skills/readme-generator) directory into your agent's skills directory so root repository files are not included.
 
 Global on Unix/macOS (`~/.agents/skills`):
 
 ```bash
-mkdir -p ~/.agents/skills && git clone https://github.com/dexter826/readme-generator.git ~/.agents/skills/readme-generator
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/dexter826/readme-generator.git "$tmp" && mkdir -p ~/.agents/skills && rm -rf ~/.agents/skills/readme-generator && cp -R "$tmp/skills/readme-generator" ~/.agents/skills/readme-generator && rm -rf "$tmp"
 ```
 
 Project-level on Unix/macOS (`.agents/skills`):
 
 ```bash
-mkdir -p .agents/skills && git clone https://github.com/dexter826/readme-generator.git .agents/skills/readme-generator
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/dexter826/readme-generator.git "$tmp" && mkdir -p .agents/skills && rm -rf .agents/skills/readme-generator && cp -R "$tmp/skills/readme-generator" .agents/skills/readme-generator && rm -rf "$tmp"
 ```
 
 Global on Windows PowerShell (`$HOME\.agents\skills`):
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$HOME\.agents\skills" | Out-Null
-git clone https://github.com/dexter826/readme-generator.git "$HOME\.agents\skills\readme-generator"
+$tmp = Join-Path ([IO.Path]::GetTempPath()) ([IO.Path]::GetRandomFileName())
+git clone --depth 1 https://github.com/dexter826/readme-generator.git $tmp
+if ($LASTEXITCODE -eq 0) {
+  New-Item -ItemType Directory -Force -Path "$HOME\.agents\skills" | Out-Null
+  Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$HOME\.agents\skills\readme-generator"
+  Copy-Item -Recurse "$tmp\skills\readme-generator" "$HOME\.agents\skills\readme-generator"
+}
+Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $tmp
 ```
 
 ## Usage
@@ -99,26 +105,28 @@ Viết file README.md bằng tiếng Việt cho repo này
 
 ```text
 readme-generator/
-├── SKILL.md                                     # Core skill metadata and 4-phase workflow
-├── README.md                                    # Repository documentation
-├── CHANGELOG.md                                 # Release history (Keep a Changelog)
-├── LICENSE                                      # MIT license
-├── .gitignore                                   # Excluded caches, build outputs, and env files
-├── .gitattributes                               # LF line-ending and binary normalization
-├── .editorconfig                                # UTF-8 and indentation rules
+├── README.md                                        # Repository documentation
+├── CHANGELOG.md                                     # Release history (Keep a Changelog)
+├── LICENSE                                          # MIT license
+├── .gitignore                                       # Excluded caches, build outputs, and env files
+├── .gitattributes                                   # LF line-ending and binary normalization
+├── .editorconfig                                    # UTF-8 and indentation rules
 ├── docs/
-│   └── logo/                                    # M.O.B Signal SVG masters and symbol PNG
-├── references/
-│   ├── archetypes-and-sections.md               # Archetype detection, section selection, existing README modes
-│   ├── writing-and-style.md                     # English/Vietnamese style, Mermaid, badges, TOC, and media rules
-│   └── anti-leakage-and-verification.md         # Security boundary exclusions and pre-delivery checks
-├── assets/
-│   └── blueprints/
-│       ├── app-and-api.md                       # Composable blueprint for apps and backend services
-│       ├── library-and-cli.md                   # Composable blueprint for libraries, SDKs, and CLIs
-│       └── monorepo-and-plugin.md               # Composable blueprint for monorepos, plugins, and skills
+│   └── logo/                                        # M.O.B Signal SVG masters and symbol PNG
+├── skills/
+│   └── readme-generator/
+│       ├── SKILL.md                                 # Core skill metadata and 4-phase workflow
+│       ├── references/
+│       │   ├── archetypes-and-sections.md           # Archetype detection, section selection, existing README modes
+│       │   ├── writing-and-style.md                 # English/Vietnamese style, Mermaid, badges, TOC, and media rules
+│       │   └── anti-leakage-and-verification.md     # Security boundary exclusions and pre-delivery checks
+│       └── assets/
+│           └── blueprints/
+│               ├── app-and-api.md                   # Composable blueprint for apps and backend services
+│               ├── library-and-cli.md               # Composable blueprint for libraries, SDKs, and CLIs
+│               └── monorepo-and-plugin.md           # Composable blueprint for monorepos, plugins, and skills
 └── evals/
-    └── evals.json                               # Evaluation test prompts and assertions
+    └── evals.json                                   # Evaluation test prompts and assertions
 ```
 
 ## License
