@@ -2,12 +2,13 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/logo/readme-generator-horizontal-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="docs/logo/readme-generator-horizontal-light.svg" />
-    <img alt="readme-generator" src="docs/logo/readme-generator-horizontal-light.svg" width="460" />
+    <img alt="readme-generator" src="docs/logo/readme-generator-horizontal-light.svg" width="420" />
   </picture>
 </p>
 
 <p align="center">
   <a href="SKILL.md"><img src="https://img.shields.io/badge/standard-AgentSkill-00cc5c?style=flat-square&labelColor=0a0a0a" alt="standard: AgentSkill" /></a>
+  <a href="references/writing-and-style.md"><img src="https://img.shields.io/badge/languages-VI%20%7C%20EN-00cc5c?style=flat-square&labelColor=0a0a0a" alt="languages: VI | EN" /></a>
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.0.0-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.0.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-00cc5c?style=flat-square&labelColor=0a0a0a" alt="license: MIT" /></a>
 </p>
@@ -16,56 +17,60 @@
 
 Cross-platform AgentSkill for generating and updating evidence-grounded `README.md` documentation across software repositories.
 
-## Overview
-
-`readme-generator` guides AI coding agents to inspect actual repository files first, resolve missing context or existing-file strategies in a single clarification turn, and produce direct technical documentation without hallucinated commands, marketing filler, or leaked internal configuration.
-
 ## Capabilities
 
 - **Codebase-first discovery**: Extracts verified runtimes, dependencies, entrypoints, scripts, environment variable names, licenses, and local visual assets from real repository files.
-- **Adaptive clarification gate**: Consolidates ambiguous choices (output language, repository visibility, missing critical metadata, or how to handle an existing `README.md`) into one concise question turn instead of overwriting custom docs or inventing defaults.
-- **Flexible archetype composition**: Supports web/mobile/desktop applications, backend APIs, libraries/SDKs, CLI tools, monorepos, plugins/agent skills, and hybrid repositories without forcing fixed templates or line caps.
+- **Adaptive clarification gate**: Consolidates ambiguous choices (output language, repository visibility, missing critical metadata, or existing-file strategy) into one concise question turn before editing.
+- **Adaptive archetype composition**: Supports web/mobile/desktop applications, backend APIs, libraries/SDKs, CLI tools, monorepos, plugins/agent skills, and hybrid repositories without forcing fixed line caps.
 - **Anti-leakage guardrails**: Excludes live credentials, database security rules, raw internal schema dumps, CI/CD workflow internals, and private endpoints.
 - **Bilingual output standards**: Supports technical English and natural Vietnamese with complete diacritics and anti-translationese rules.
 
-## Compatibility
+## Execution Modes & Compatibility
 
-Designed for AgentSkills-compatible coding agents without IDE-locked tool constraints:
+Compatible with AgentSkills-enabled coding agents without IDE-locked tool constraints: **Antigravity**, **Claude Code**, **Codex**, and **Gemini CLI**.
 
-- Antigravity
-- Claude Code
-- Codex
-- Gemini CLI
+| Mode | When applied | Behavior |
+| :--- | :--- | :--- |
+| **Create** | No `README.md` exists yet | Composes sections from verified codebase evidence and matching blueprints |
+| **Replace cleanly** | Existing starter boilerplate or stale doc | Rebuilds structure from current repo facts while keeping valid local media |
+| **Preserve-and-upgrade** | Existing custom `README.md` | Keeps valid custom sections, badges, and media while updating stale facts |
+| **Surgical update** | Targeted section change requested | Modifies only specified outdated or broken sections |
 
 ## Installation
 
 ### Via Skills CLI (Recommended)
 
-Install directly from GitHub using [`skills`](https://skills.sh/):
+Install directly from GitHub using [`skills`](https://skills.sh/).
+
+Project-level installation:
 
 ```bash
-# Project-level installation (interactive)
 npx skills add dexter826/readme-generator
+```
 
-# Global installation (skip confirmation prompts)
+Global installation (non-interactive):
+
+```bash
 npx skills add dexter826/readme-generator -g -y
 ```
 
 ### Manual Installation
 
-Clone or copy this repository into your agent's global or project-level skills directory so the skill folder is named `readme-generator`:
+Clone this repository into your agent's skills directory so the folder is named `readme-generator`.
+
+Global on Unix/macOS (`~/.agents/skills`):
 
 ```bash
-# Project-level installation (shared via repository)
-mkdir -p .agents/skills
-git clone https://github.com/dexter826/readme-generator.git .agents/skills/readme-generator
-
-# Global installation on Unix/macOS (shared cross-runtime path)
-mkdir -p ~/.agents/skills
-git clone https://github.com/dexter826/readme-generator.git ~/.agents/skills/readme-generator
+mkdir -p ~/.agents/skills && git clone https://github.com/dexter826/readme-generator.git ~/.agents/skills/readme-generator
 ```
 
-On Windows PowerShell:
+Project-level on Unix/macOS (`.agents/skills`):
+
+```bash
+mkdir -p .agents/skills && git clone https://github.com/dexter826/readme-generator.git .agents/skills/readme-generator
+```
+
+Global on Windows PowerShell (`$HOME\.agents\skills`):
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$HOME\.agents\skills" | Out-Null
@@ -74,15 +79,23 @@ git clone https://github.com/dexter826/readme-generator.git "$HOME\.agents\skill
 
 ## Usage
 
-Ask your agent to document a repository or invoke `/readme-generator` when supported:
+Ask your agent to document a repository or invoke `/readme-generator` when supported. When a repository already contains a `README.md` or lacks key setup details (such as a `LICENSE`, production command, or `.env.example`), the skill asks once how to proceed before modifying files.
 
-- `"Create a README.md for this repository"`
-- `"Update README.md to match the current FastAPI endpoints and Docker setup"`
-- `"Viết file README.md bằng tiếng Việt cho repo này"`
+### Example Prompts
 
-When a repository already contains a `README.md` or lacks key setup details (such as a `LICENSE`, production run command, or `.env.example`), the skill asks once how to proceed before modifying files.
+```text
+Create a README.md for this repository
+```
 
-## Repository Structure
+```text
+Update README.md to match the current FastAPI endpoints and Docker setup
+```
+
+```text
+Viết file README.md bằng tiếng Việt cho repo này
+```
+
+### Repository Structure
 
 ```text
 readme-generator/
@@ -90,6 +103,9 @@ readme-generator/
 ├── README.md                                    # Repository documentation
 ├── CHANGELOG.md                                 # Release history (Keep a Changelog)
 ├── LICENSE                                      # MIT license
+├── .gitignore                                   # Excluded caches, build outputs, and env files
+├── .gitattributes                               # LF line-ending and binary normalization
+├── .editorconfig                                # UTF-8 and indentation rules
 ├── docs/
 │   └── logo/                                    # M.O.B Signal SVG masters and symbol PNG
 ├── references/
