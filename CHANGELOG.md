@@ -1,0 +1,18 @@
+# Changelog
+
+All notable changes to `readme-generator` are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.0.0] - 2026-11-11
+
+### Added
+
+- Core AgentSkill definition in `SKILL.md` (`version: 1.0.0`, MIT license) with a 4-phase workflow: Silent Codebase Discovery, Adaptive Clarification Gate, Architecture-Driven Authoring, and Security Audit and Verification.
+- Modular reference guides in `references/` covering repository archetype detection and existing README modes (`archetypes-and-sections.md`), bilingual English/Vietnamese style and formatting rules (`writing-and-style.md`), and anti-leakage verification guardrails (`anti-leakage-and-verification.md`).
+- Composable repository blueprints in `assets/blueprints/` for apps/backend APIs (`app-and-api.md`), libraries/SDKs/CLIs (`library-and-cli.md`), and monorepos/plugins/agent skills (`monorepo-and-plugin.md`).
+- Evaluation test suite in `evals/evals.json`.
+- Lean M.O.B Signal logo suite (`Turned Codex`) in `docs/logo/` with light/dark horizontal and symbol SVGs, `512x512` symbol PNG fallback, usage notes, and responsive `<picture>` integration in `README.md`.
+- Repository baseline files: `README.md`, `LICENSE` (MIT), `.gitignore`, `.gitattributes`, `.editorconfig`, and `CHANGELOG.md`.

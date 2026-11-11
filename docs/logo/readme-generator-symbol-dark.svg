@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="readme-generator symbol (dark mode)">
+  <title>readme-generator symbol (dark mode)</title>
+  <g id="symbol">
+    <path d="M 28 70 C 28 48, 46 38, 66 44 C 84 49, 100 58, 112 69 C 116 73, 118 77, 118 83 V 197 C 118 209, 105 215, 93 207 C 73 194, 53 187, 39 185 C 32 184, 28 177, 28 167 Z" fill="#ededed"/>
+    <path d="M 138 83 C 138 77, 140 73, 144 69 C 149 64, 155 59, 161 55 C 166 51, 171 54, 172 62 C 176 92, 192 110, 220 116 C 225 117, 228 122, 228 128 V 167 C 228 177, 224 184, 217 185 C 203 187, 183 194, 163 207 C 151 215, 138 209, 138 197 Z" fill="#ededed"/>
+    <path d="M 189 44 C 207 40, 226 51, 228 72 V 86 C 228 93, 222 95, 215 92 C 199 84, 189 70, 185 52 C 184 47, 186 45, 189 44 Z" fill="#00cc5c"/>
+  </g>
+</svg>
