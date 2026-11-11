@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-11
+
+### Changed
+
+- Relocated the installable AgentSkill payload (`SKILL.md`, `references/`, and `assets/`) into `skills/readme-generator/` so `npx skills add` installs only skill files without root repository clutter.
+- Updated `README.md` with execution modes, `languages: VI | EN` badge, `npx skills` CLI commands, isolated manual installation commands, updated badge links, and the `skills/readme-generator/` repository tree.
+- Bumped `metadata.version` in `skills/readme-generator/SKILL.md` to `1.0.1`.
+
+### Removed
+
+- Removed redundant `docs/logo/README.md`.
+
 ## [1.0.0] - 2026-11-11
 
 ### Added
