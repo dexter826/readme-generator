@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Plugin distribution manifests (`plugin.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`, `.antigravity-plugin/plugin.json`) so the repository installs directly as a plugin on Claude Code, Codex, and Antigravity, with a matching install section in `README.md`.
+
 ## [1.0.1] - 2026-11-11
 
 ### Changed

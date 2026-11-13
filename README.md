@@ -38,6 +38,30 @@ Compatible with AgentSkills-enabled coding agents without IDE-locked tool constr
 
 ## Installation
 
+### Via Plugin Marketplace (Claude Code, Codex, Antigravity)
+
+Install the repository directly as a plugin:
+
+Claude Code:
+
+```text
+/plugin marketplace add dexter826/readme-generator
+/plugin install readme-generator@readme-generator
+```
+
+Codex:
+
+```bash
+codex plugin marketplace add dexter826/readme-generator
+codex plugin add readme-generator@readme-generator
+```
+
+Antigravity:
+
+```bash
+agy plugin install https://github.com/dexter826/readme-generator
+```
+
 ### Via Skills CLI (Recommended)
 
 Install directly from GitHub using [`skills`](https://skills.sh/).
@@ -111,6 +135,15 @@ readme-generator/
 ├── .gitignore                                       # Excluded caches, build outputs, and env files
 ├── .gitattributes                                   # LF line-ending and binary normalization
 ├── .editorconfig                                    # UTF-8 and indentation rules
+├── plugin.json                                      # Codex portable plugin manifest
+├── .claude-plugin/
+│   ├── plugin.json                                  # Claude Code plugin manifest
+│   └── marketplace.json                             # Claude Code marketplace catalog
+├── .antigravity-plugin/
+│   └── plugin.json                                  # Antigravity plugin manifest
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json                         # Codex marketplace catalog
 ├── docs/
 │   └── logo/                                        # M.O.B Signal SVG masters and symbol PNG
 ├── skills/

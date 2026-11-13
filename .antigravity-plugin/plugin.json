@@ -1,0 +1,26 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "readme-generator",
+  "displayName": "README Generator",
+  "version": "1.0.1",
+  "description": "Generate or update evidence-grounded README.md files for any repository, in English or Vietnamese, with anti-leakage guardrails.",
+  "author": {
+    "name": "dexter826",
+    "url": "https://github.com/dexter826"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/dexter826/readme-generator",
+  "homepage": "https://github.com/dexter826/readme-generator",
+  "keywords": [
+    "readme",
+    "documentation",
+    "docs",
+    "markdown"
+  ],
+  "logo": "docs/logo/readme-generator-symbol.png",
+  "suggestedPrompts": [
+    "Create a README.md for this repository",
+    "Update README.md to match the current setup",
+    "Viết file README.md bằng tiếng Việt cho repo này"
+  ]
+}

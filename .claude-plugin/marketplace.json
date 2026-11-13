@@ -1,0 +1,15 @@
+{
+  "name": "readme-generator",
+  "owner": {
+    "name": "dexter826"
+  },
+  "plugins": [
+    {
+      "name": "readme-generator",
+      "source": "./",
+      "version": "1.0.1",
+      "description": "Generate or update evidence-grounded README.md files for any repository, in English or Vietnamese, with anti-leakage guardrails.",
+      "category": "developer-tools"
+    }
+  ]
+}
