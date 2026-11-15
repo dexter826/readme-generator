@@ -17,9 +17,11 @@
 
 Cross-platform AgentSkill for generating and updating evidence-grounded `README.md` documentation across software repositories.
 
-## Demo
+## How it works
 
-https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e" controls muted loop playsinline preload="metadata" width="820"></video>
+</p>
 
 ## Capabilities
 
@@ -133,37 +135,24 @@ Viết file README.md bằng tiếng Việt cho repo này
 
 ```text
 readme-generator/
-├── README.md                                        # Repository documentation
-├── CHANGELOG.md                                     # Release history (Keep a Changelog)
-├── LICENSE                                          # MIT license
-├── .gitignore                                       # Excluded caches, build outputs, and env files
-├── .gitattributes                                   # LF line-ending and binary normalization
-├── .editorconfig                                    # UTF-8 and indentation rules
-├── plugin.json                                      # Codex portable plugin manifest
-├── .claude-plugin/
-│   ├── plugin.json                                  # Claude Code plugin manifest
-│   └── marketplace.json                             # Claude Code marketplace catalog
-├── .antigravity-plugin/
-│   └── plugin.json                                  # Antigravity plugin manifest
-├── .agents/
-│   └── plugins/
-│       └── marketplace.json                         # Codex marketplace catalog
+├── README.md                     # Overview, install, and usage
+├── CHANGELOG.md                  # Release history
+├── LICENSE                       # MIT
+├── .editorconfig                 # Editor defaults
+├── .gitattributes                # Line endings and binary types
+├── .gitignore                    # Ignored local files
+├── plugin.json                   # Codex manifest
+├── .claude-plugin/               # Claude Code manifest and marketplace
+├── .antigravity-plugin/          # Antigravity manifest
+├── .agents/plugins/              # Codex marketplace
 ├── docs/
-│   └── logo/                                        # M.O.B Signal SVG masters and symbol PNG
-├── skills/
-│   └── readme-generator/
-│       ├── SKILL.md                                 # Core skill metadata and 4-phase workflow
-│       ├── references/
-│       │   ├── archetypes-and-sections.md           # Archetype detection, section selection, existing README modes
-│       │   ├── writing-and-style.md                 # English/Vietnamese style, Mermaid, badges, TOC, and media rules
-│       │   └── anti-leakage-and-verification.md     # Security boundary exclusions and pre-delivery checks
-│       └── assets/
-│           └── blueprints/
-│               ├── app-and-api.md                   # Composable blueprint for apps and backend services
-│               ├── library-and-cli.md               # Composable blueprint for libraries, SDKs, and CLIs
-│               └── monorepo-and-plugin.md           # Composable blueprint for monorepos, plugins, and skills
+│   └── logo/                     # M.O.B Signal logo assets
+├── skills/readme-generator/
+│   ├── SKILL.md                  # Workflow and rules
+│   ├── references/               # Archetypes, style, and anti-leakage guidance
+│   └── assets/blueprints/        # App, library, CLI, monorepo, and plugin blueprints
 └── evals/
-    └── evals.json                                   # Evaluation test prompts and assertions
+    └── evals.json                # Evaluation prompts and assertions
 ```
 
 ## License
