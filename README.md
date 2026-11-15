@@ -17,7 +17,7 @@
 
 Cross-platform AgentSkill for generating and updating evidence-grounded `README.md` documentation across software repositories.
 
-https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e
+[🎬 Watch the demo video](https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e)
 
 ## Capabilities
 
