@@ -13,7 +13,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-00cc5c?style=flat-square&labelColor=0a0a0a" alt="license: MIT" /></a>
 </p>
 
-# readme-generator
+<h1 align="center">readme-generator</h1>
 
 Cross-platform AgentSkill for generating and updating evidence-grounded `README.md` documentation across software repositories.
 
