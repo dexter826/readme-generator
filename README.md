@@ -17,6 +17,10 @@
 
 Cross-platform AgentSkill for generating and updating evidence-grounded `README.md` documentation across software repositories.
 
+## Demo
+
+https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e
+
 ## Capabilities
 
 - **Codebase-first discovery**: Extracts verified runtimes, dependencies, entrypoints, scripts, environment variable names, licenses, and local visual assets from real repository files.
