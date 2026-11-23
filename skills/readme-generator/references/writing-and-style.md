@@ -37,7 +37,7 @@ Every project README must answer two questions in the first 1–2 sentences:
 2. **What problem does it solve for the reader?** (Concrete benefit, workflow, or capability).
 
 *Example:*
-> `readme-generator` is an agent skill for Antigravity and Claude Code that inspects your repository to produce evidence-grounded, production-ready `README.md` documentation without manual copy-pasting.
+> `imgpack` is a command-line image optimization utility that compresses PNG and WebP assets by up to 70% without observable quality loss.
 
 ---
 
@@ -61,38 +61,70 @@ When generating or updating a README in Vietnamese:
 
 ## 3. Formatting, Visual Elements, and Automated Visual Conventions
 
-Never ask the user how or where to format visual assets. The skill applies **Zero-Question Visual Conventions** based entirely on inspected files:
+Never ask the user how or where to format visual assets. The skill applies **Zero-Question Visual Conventions** based purely on real assets discovered across standard media locations (`assets/`, `docs/`, `.github/`, `media/`, `static/`, `public/`, or root):
 
 ### 3.1 Automated Header & Asset Placement
 
-1. **Responsive Dark/Light Logo**: When both light and dark SVG logos exist in `docs/` or `assets/`, automatically render with GitHub-compliant `<picture>` block:
-   ```html
-   <p align="center">
-     <picture>
-       <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg" />
-       <source media="(prefers-color-scheme: light)" srcset="docs/logo-light.svg" />
-       <img alt="Project Logo" src="docs/logo-light.svg" width="380" />
-     </picture>
-   </p>
-   ```
-2. **Single Logo**: When only a single logo asset exists (`logo.svg`, `logo.png`):
-   - Center using `<p align="center"><img src="docs/logo.svg" alt="Project Logo" width="120" /></p>`.
-3. **No Visual Assets**: When no logo or banner exists (pure libraries, internal microservices):
-   - Use clean, left-aligned standard Markdown `# project-name` without HTML centering tags.
-4. **Repository Banner Image**: When a banner image (`docs/banner.png` or `assets/banner.png`) exists:
-   - Place as a clean, responsive hero banner immediately below the title or badge row.
-   - Use `<img src="docs/banner.png" alt="Project Banner" width="100%" />` to ensure seamless scaling.
-5. **Video Asset**: When a video asset (`.mp4`) or hosted GitHub asset URL is present:
-   - Determine section role from content: For live CLI or interactive screencasts, title the section `## Demo`. For animated workflow explainers or pipeline visualizations, title it `## How It Works` or `## Visual Workflow`.
-   - Place directly after the Summary or Capabilities section.
-   - Use GitHub asset video syntax or an interactive link card with a concise caption describing the visual flow.
-6. **Quick Navigation Bar**: For centered hero headers, automatically include anchor navigation separated by `•`:
-   `[Features](#features) • [Quick Start](#quick-start) • [Configuration](#configuration) • [Contributing](#contributing) • [License](#license)`
+1. **No Visual Assets Found (Default for Core Libraries & Utilities)**:
+   - When no logo, banner, or screenshots exist in the repository, use clean, left-aligned standard Markdown:
+     ```markdown
+     # project-name
+
+     A declarative one-sentence description answering what problem the project solves.
+     ```
+   - Never inject empty HTML tags, placeholders, or forced centering when no visual assets exist.
+
+2. **Logo Asset Found**:
+   - **Responsive Dark/Light Pair**: When matching light and dark SVG logos exist (e.g. `logo-dark.svg` and `logo-light.svg`):
+     ```html
+     <p align="center">
+       <picture>
+         <source media="(prefers-color-scheme: dark)" srcset="<path-to-dark-logo>" />
+         <source media="(prefers-color-scheme: light)" srcset="<path-to-light-logo>" />
+         <img alt="Project Logo" src="<path-to-light-logo>" width="380" />
+       </picture>
+     </p>
+     ```
+   - **Single Logo / Icon**: When only one logo file exists:
+     ```html
+     <p align="center">
+       <img src="<path-to-logo>" alt="Project Logo" width="120" />
+     </p>
+     ```
+   - Constrain logo width reasonably (`80px` to `400px`) to prevent display distortion.
+
+3. **Hero / Showcase Banner Found**:
+   - When a dedicated banner or header image exists (`banner.*`, `hero.*`, `header.*`, `cover.*`):
+     - Place as a responsive visual block immediately below the title or badge row.
+     - Use `<img src="<path-to-banner>" alt="Project Banner" width="100%" />` to preserve responsive scaling.
+
+4. **Rich Visual Walkthrough / Demo Media Found**:
+   - Inspect the nature and format of the discovered visual media:
+     - **Animated Media (GIF / WebP)**: Commonly used for terminal recordings or fast UI walkthroughs. Embed directly using standard Markdown `![Walkthrough](<path-to-media.gif>)`.
+     - **Video Media (Hosted Video / MP4 / MOV)**: Commonly used for motion explainers or deep walkthroughs. Embed using GitHub asset video syntax or an interactive link card.
+     - **Terminal Casts (Asciinema / SVG)**: Embed using standard SVG badges or asciinema player links.
+     - **Static Screenshots**: UI application screen captures.
+   - Title the containing section accurately based on the content role:
+     - `## Demo` — For live CLI screencasts, terminal recordings, or interactive application walkthroughs.
+     - `## How It Works` or `## Architecture Overview` — For visual pipeline diagrams, motion explainers, or architectural schematics.
+     - `## Preview` or `## Screenshots` — For static UI or dashboard gallery captures.
+
+5. **Quick Navigation Bar**:
+   - When a Centered Hero Header is applied (branding exists), include a clean anchor navigation row separated by `•`:
+     ```html
+     <p align="center">
+       <a href="#features">Features</a> •
+       <a href="#quick-start">Quick Start</a> •
+       <a href="#configuration">Configuration</a> •
+       <a href="#contributing">Contributing</a> •
+       <a href="#license">License</a>
+     </p>
+     ```
 
 ### 3.2 Badges Standardization
 
 - **Style**: Standardize on `style=flat-square` or clean minimalist badges.
-- **Alignment**: Place all badges in a single centered row immediately below the logo/title.
+- **Alignment**: Place all badges in a single row immediately below the logo/title. Center only if the header is centered.
 - **Evidence only**: Never invent build-passing, code-coverage, or live-deployment badges when no matching `.github/workflows/` or external integration exists in the repository.
 
 ### 3.3 GitHub Flavored Markdown (GFM) Admonitions
@@ -157,11 +189,11 @@ Documentation perspective must adapt to the target audience without breaking can
 | **End-User Lens** | Daily operators, CLI users, desktop/app users | Practical day-to-day command usage, output formats, task workflows | Task-oriented, step-by-step clarity, input $\rightarrow$ output, practical usage examples |
 | **Ops / Admin Lens** | DevOps, SREs, platform engineers, sysadmins | Deployment, containerization, environment variables, security posture | Operational stability, health checks, ports, memory limits, TLS, audit logs |
 
-### 4.2 Lens Comparison Matrix Across Standard Sections
+### 4.2 Lens Comparison Matrix Across Standard Sections (Example: Background Job Scheduler)
 
 | Section | Developer Lens | Product Lens | End-User Lens | Ops / Admin Lens |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tagline (WIIFM)** | `"Cross-platform AgentSkill generating evidence-grounded README.md files from codebase ASTs."` | `"Automated documentation engine that turns raw repositories into production-ready READMEs in seconds."` | `"CLI tool that creates and updates your project's README without manual writing."` | `"Containerized documentation daemon enforcing codebase compliance and automated audit gates."` |
-| **Feature Bullets** | Focus on AST parsing, manifest inspection, regex verification, API contract validation. | Focus on developer time saved, elimination of documentation drift, consistent repo presentation. | Focus on one-command execution, easy prompts, clean output formatting. | Focus on automated verification checks, secret leakage prevention, CI integration. |
-| **Quick Start** | `$ npm test:run`<br>`$ tsc --watch` *(How to build & test)* | Run interactive demo or view before/after documentation showcase. | `$ npx tool generate`<br>*(Immediate usage command)* | `$ docker compose up -d`<br>*(Container launch & health check)* |
-| **Configuration** | Internal build configs, tsconfig paths, exported types. | Pricing/editions, feature toggles, cloud vs self-hosted modes. | CLI options (`--output`, `--lang`), shell completions. | Environment variables, secrets, network ports, volume mounts. |
+| **Tagline (WIIFM)** | `"Distributed task queue written in Go with Raft consensus and zero external dependencies."` | `"Automated background job engine that eliminates server bottlenecks and cuts infrastructure costs by 40%."` | `"Command-line tool to schedule, monitor, and retry background jobs with a single command."` | `"Production-ready task daemon with Prometheus metrics, graceful drainage, and zero-downtime rolling upgrades."` |
+| **Feature Bullets** | Focus on thread-safe memory pool, gRPC streaming API, sub-millisecond p99 latency, and typed client SDKs. | Focus on real-time execution visibility, automated failure recovery, predictable SLA, and eliminated data loss. | Focus on single-binary installation, human-readable terminal progress, automatic retries, and clean logging. | Focus on native Helm charts, non-root container security, configurable CPU/memory limits, and structured JSON audit trails. |
+| **Quick Start** | `$ go test ./... -race`<br>`$ make build` *(How to build & verify)* | View live interactive playground or one-click sandbox setup link. | `$ taskmesh schedule --cron "0 * * * *" ./backup.sh`<br>*(Direct usage command)* | `$ helm install taskmesh ./charts/taskmesh -f values-prod.yaml`<br>*(Production deployment)* |
+| **Configuration** | Internal interface overrides, worker pool concurrency flags, Raft election timeouts. | Feature tier toggles, notification webhook targets, SLA tier settings. | User CLI flags (`--verbose`, `--output`), config file path (`~/.config/app.yaml`). | Environment variables, TLS certificate paths, Prometheus scrape ports, healthcheck probe intervals. |

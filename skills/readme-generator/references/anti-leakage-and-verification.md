@@ -34,7 +34,7 @@ Never expose the following categories in a README, even if present in repository
 Before delivering or writing `README.md`, audit every item below directly against the files you inspected and the decisions aligned with the user:
 
 - [ ] **Collaborative Scoping Gate passed**: Wording Lens (Developer / Product / End-User / Ops) and Key Highlights were aligned in Phase 2 (or explicitly bypassed via `--non-interactive`).
-- [ ] **Zero-Question Visuals applied**: Layout, logo `<picture>`, banner placement, video player block, and badges were automated based on discovered assets without bothering the user with formatting questions.
+- [ ] **Visual presentation verified**: When branding or media assets exist (logos, banners, walkthroughs), they are formatted automatically without asking layout questions; when no assets exist, clean left-aligned Markdown is preserved without forced centering or empty placeholders.
 - [ ] **Fact Audit & Drift verified**: If an existing README was present, drift was evaluated honestly. Zero-drift documentation was not arbitrarily rewritten or nitpicked.
 - [ ] **Wording Lens consistency**: Vocabulary, tone, and value emphasis strictly align with the selected lens across the tagline, feature bullets, quickstart, and configuration.
 - [ ] **Commands verified**: Every install, dev, build, test, lint, migration, and Docker command matches actual scripts in manifests, `Makefile`, `Dockerfile`, or CLI entrypoints.

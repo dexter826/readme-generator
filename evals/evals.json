@@ -56,7 +56,7 @@
       "expectations": [
         "Recognizes that existing commands and configurations match the codebase with zero drift.",
         "Reports Fact Audit: 100% In Sync instead of forcing a blind rewrite or nitpicking healthy documentation.",
-        "Does not ask questions about banner placement, video embed formatting, or badge styling (honors Zero-Question Visuals).",
+        "Does not ask questions about layout, visual styling, or media formatting (honors Zero-Question Visuals).",
         "Presents the Product Wording Lens as an option to focus on user pain points, business benefits, and WIIFM outcomes.",
         "Preserves canonical GitHub README structure (Header, WIIFM, Capabilities, Quickstart, Config, Contributing, License) even when Product Lens is active."
       ]

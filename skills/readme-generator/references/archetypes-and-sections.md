@@ -40,7 +40,7 @@ When a repository contains unusual top-level directories, specialized automation
 .
 ├── apps/               # User-facing applications (Next.js web and Electron desktop)
 ├── packages/           # Shared libraries (core engine, UI tokens, API client)
-├── .agents/            # Agent skill definitions and automation workflows
+├── internal/           # Private implementation modules and domain models
 └── scripts/            # Build, packaging, and benchmark automation scripts
 ```
 ```

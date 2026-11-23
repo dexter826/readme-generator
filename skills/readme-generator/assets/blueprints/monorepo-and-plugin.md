@@ -110,8 +110,8 @@ Distributed under the [MIT](LICENSE) License.
 ## Installation
 
 ```bash
-# Install into your agent configuration
-git clone <repo-url> ~/.gemini/config/skills/<skill-name>
+# Clone into your agent's skills directory
+git clone <repo-url> <agent-skills-directory>/<skill-name>
 ```
 
 ## Usage & Triggers

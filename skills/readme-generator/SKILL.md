@@ -16,7 +16,7 @@ Write and maintain accurate, scannable, and modern `README.md` documentation gro
 
 - **Evidence over assumptions**: Every command, file path, environment variable, API signature, CLI flag, dependency, and license reference must trace directly to inspected repository files or explicit user instructions. One broken Quick Start command destroys developer trust.
 - **Collaborative scoping over unilateral guessing**: Never unilaterally decide documentation depth, audience lens, or overwrite custom docs without consulting the user. Discover facts silently first, audit drift, then align core intent decisions in a focused interactive turn.
-- **Zero-question visual conventions**: Never burden the user with questions about format, banner placement, badge styling, or video embedding. Standardize 100% of visual presentation rules automatically based on detected assets (logos, banners, videos).
+- **Zero-question visual conventions**: Never burden the user with questions about layout, image placement, or badge styling. Automatically apply standard visual conventions based purely on detected repository assets, or preserve clean left-aligned Markdown when no media exists.
 - **Integrity-first fact audit (No-Op on zero drift)**: When an existing README is already 100% accurate and synchronized with the codebase, report a clean health pass. Never nitpick or blindly rewrite healthy documentation; offer targeted wording or structural enhancements instead.
 - **Persona wording lenses within standard structure**: Decouple document perspective from structural layout. Maintain standard GitHub section architecture while tuning vocabulary, tone, and emphasis across 4 Wording Lenses: **Developer**, **Product**, **End-User**, and **Ops/Admin**. Read [references/writing-and-style.md](./references/writing-and-style.md).
 - **Global technical clarity (ESL & WIIFM)**: Value clarity over literary complexity. Aim for an accessible Flesch-Kincaid reading level ($\le$ Grade 9), active voice, short noun phrases (no modifier stacking), and open with a direct "What's in it for me" (WIIFM) statement.
@@ -34,7 +34,7 @@ Inspect the repository using file-reading and search tools before asking the use
 4. **Configuration surface**: Inspect `.env.example`, `.env.template`, and config loaders for variable *names* and safe defaults. Never read or copy secret values from `.env` or credential files into documentation.
 5. **Licensing, visibility, and visual assets**:
    - Check `LICENSE` files and private markers (`"private": true`).
-   - Check `docs/`, `assets/`, or `.github/` for real screenshots, logos, banners, or video files.
+   - Check media directories (`assets/`, `docs/`, `.github/`, `media/`, `static/`, or root) for real logos, hero banners, screenshots, or walkthrough media.
 6. **Existing README Fact Audit**:
    - If an existing `README.md` exists, audit its commands, environment variables, dependencies, and badges against codebase reality.
    - Categorize findings (see [references/archetypes-and-sections.md](./references/archetypes-and-sections.md#5-fact-audit-drift-matrix--zero-drift-handling) for the Fact Audit & Drift Matrix schema):
@@ -79,7 +79,7 @@ Never proceed straight to writing without consulting the user. Pause and conduct
    - Monorepos, plugins, and agent skills: [assets/blueprints/monorepo-and-plugin.md](./assets/blueprints/monorepo-and-plugin.md)
 3. Follow [references/writing-and-style.md](./references/writing-and-style.md) for:
    - **Selected Wording Lens**: Apply the agreed persona vocabulary, tone, and emphasis consistently across all sections.
-   - **Automated Visual Conventions**: Apply Centered Hero Header, responsive SVG `<picture>`, repository banner hero placement, GFM video embed block, badges, and quick links bar.
+   - **Automated Visual Conventions**: Integrate discovered branding or walkthrough media automatically per Section 3 without layout clutter, or keep clean left-aligned Markdown when no visual assets exist.
    - **ESL Technical Writing Standards**: Flesch-Kincaid Grade $\le$ 9, active voice, no modifier stacking, 1 concept per sentence, or natural Vietnamese with complete diacritics.
    - **GFM Admonitions & Collapsible Details**: Use `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` for callouts and `<details><summary>` for secondary reference tables.
    - **Anti-duplication**: Link to `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE` concisely.

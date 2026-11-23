@@ -4,10 +4,12 @@ Composable section blueprint for standalone applications (web, mobile, desktop) 
 
 ## Suggested Section Flow
 
+### Option A: Centered Hero Header (User-Facing Applications with Visual Branding)
+
 ```html
 <div align="center">
 
-<!-- Optional: project logo/icon if available in docs/ or assets/ -->
+<!-- Optional: project logo/icon if available in repository media directories -->
 <img src="./docs/logo.svg" alt="Project Logo" width="120" />
 
 # <Project Name>
@@ -24,6 +26,19 @@ Composable section blueprint for standalone applications (web, mobile, desktop) 
 
 ---
 ```
+
+### Option B: Left-Aligned Standard Header (Backend APIs, Microservices, or No Visual Assets)
+
+```markdown
+# <Project Name>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Runtime](https://img.shields.io/badge/Python-3.12-blue.svg?style=flat-square)](pyproject.toml)
+
+<1 declarative sentence answering what the service provides and what problem it solves for developers or consumers (WIIFM).>
+```
+
+---
 
 ```markdown
 <!-- Optional: verified screenshot or UI preview when present in docs/ or assets/ -->
