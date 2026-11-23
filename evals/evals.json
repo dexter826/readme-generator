@@ -4,12 +4,13 @@
     {
       "id": 0,
       "prompt": "Review this FastAPI backend repository and prepare to update its README.md. Follow your skill workflow: inspect the codebase first, and if an existing README or missing critical info needs my decision before editing, ask me cleanly before overwriting anything.",
-      "expected_output": "Performs silent discovery on the Python/FastAPI/Docker repo first, detects the Backend API archetype, preserves awareness of the existing custom README and local diagram asset, presents a Diff & Upgrade Report table, identifies missing facts (no LICENSE file, undocumented REDIS_URL referenced in code), and pauses at Phase 2 (Collaborative Discovery & Scoping Gate) to ask about Scope, Audience, Highlights, and Update Strategy in a single consolidated turn with recommended defaults.",
+      "expected_output": "Performs silent discovery on the Python/FastAPI/Docker repo first, detects the Backend API archetype, preserves awareness of the existing custom README and local diagram asset, presents a Fact Audit & Drift Report table, identifies missing facts (no LICENSE file, undocumented REDIS_URL referenced in code), and pauses at Phase 2 (Collaborative Discovery & Scoping Gate) to ask only about Wording Lens and Key Highlights in a single consolidated turn with recommended defaults without asking format or layout questions.",
       "files": [],
       "expectations": [
         "Identifies the repository as a Python FastAPI backend API service (without Node.js or npm assumptions).",
-        "Presents an Existing README Diff & Upgrade Report table (comparing valid custom sections vs stale commands/env) before proposing modifications.",
-        "Pauses at Phase 2 (Collaborative Discovery & Scoping Gate) and asks the user to scope out the README (Audience, Scope, Highlights, Update Strategy) using interactive multiple-choice with recommended defaults rather than unilaterally generating.",
+        "Presents an Existing README Fact Audit & Drift Report table (comparing valid custom sections vs stale commands/env) before proposing modifications.",
+        "Pauses at Phase 2 (Collaborative Discovery & Scoping Gate) and asks only about essential intent (Wording Lens and Highlights) rather than format or layout details.",
+        "Applies zero-question visual formatting conventions automatically based on detected assets.",
         "Flags the missing LICENSE file and the undocumented REDIS_URL referenced in app/config.py instead of fabricating a license or omitting the gap silently.",
         "Does not leak or invent Node.js commands (e.g., npm run dev) or fake MIT license assumptions.",
         "Consolidates open decisions/questions into a single clear turn (with recommended defaults) rather than splitting across multiple confirmation gates."
@@ -45,6 +46,19 @@
         "Does not expose CI/CD deployment internals from .github/workflows/deploy.yml.",
         "Omits any fabricated open-source License section because package.json is marked private and no LICENSE file exists.",
         "Uses only verified scripts from package.json (dev, build, lint) without inventing nonexistent scripts."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run an update on this repository README.md. The existing README is already high quality and accurate. Check for drift and adapt to a Product Wording Lens if I decide to enhance it.",
+      "expected_output": "Executes silent discovery and Fact Audit, recognizes that existing commands and env vars match code with zero drift, reports a Fact Audit Pass (100% In Sync) rather than blindly rewriting the file, presents clear enhancement paths including Product Wording Lens, and applies Product Lens vocabulary and value emphasis without breaking canonical GitHub README section layout.",
+      "files": [],
+      "expectations": [
+        "Recognizes that existing commands and configurations match the codebase with zero drift.",
+        "Reports Fact Audit: 100% In Sync instead of forcing a blind rewrite or nitpicking healthy documentation.",
+        "Does not ask questions about banner placement, video embed formatting, or badge styling (honors Zero-Question Visuals).",
+        "Presents the Product Wording Lens as an option to focus on user pain points, business benefits, and WIIFM outcomes.",
+        "Preserves canonical GitHub README structure (Header, WIIFM, Capabilities, Quickstart, Config, Contributing, License) even when Product Lens is active."
       ]
     }
   ]
