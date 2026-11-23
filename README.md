@@ -13,11 +13,12 @@
   <p align="center">
     <a href="skills/readme-generator/SKILL.md"><img src="https://img.shields.io/badge/standard-AgentSkill-00cc5c?style=flat-square&labelColor=0a0a0a" alt="standard: AgentSkill" /></a>
     <a href="skills/readme-generator/references/writing-and-style.md"><img src="https://img.shields.io/badge/languages-VI%20%7C%20EN-00cc5c?style=flat-square&labelColor=0a0a0a" alt="languages: VI | EN" /></a>
-    <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.1.0-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.1.0" /></a>
+    <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.2.0-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.2.0" /></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-00cc5c?style=flat-square&labelColor=0a0a0a" alt="license: MIT" /></a>
   </p>
 
   <p align="center">
+    <a href="#demo">Demo</a> •
     <a href="#capabilities">Capabilities</a> •
     <a href="#execution-modes--compatibility">Compatibility</a> •
     <a href="#installation">Installation</a> •
@@ -32,15 +33,19 @@
 
 ![readme-generator banner](docs/banner.png)
 
-`readme-generator` is a cross-platform AgentSkill and plugin for Antigravity, Claude Code, Codex, and Gemini CLI. It silently inspects codebase facts—runtimes, dependencies, entrypoints, verified scripts, environment keys, and local media—to generate or update production-grade `README.md` documentation aligned with user decisions.
+`readme-generator` is a cross-platform AgentSkill and plugin for Antigravity, Claude Code, Codex, and Gemini CLI. It silently inspects codebase facts—runtimes, dependencies, entrypoints, verified scripts, environment keys, and local media—to generate or update production-grade `README.md` documentation aligned with project requirements.
+
+## Demo
 
 https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e
 
 ## Capabilities
 
 - **Codebase-first discovery**: Inspects manifests, entrypoints, scripts, environment variable names, licenses, and local visual assets from real repository files.
-- **Collaborative scoping gate**: Pauses before writing to align on target audience, detail depth (minimal vs comprehensive), visual layout, and core highlights in one focused turn.
-- **Existing README Diff & Upgrade Report**: Compares valid custom sections against outdated commands, stale paths, and removed environment variables before updating existing documentation.
+- **Zero-question visual conventions**: Automates responsive logo `<picture>` blocks, repository banner hero placement, demo video sections, and badge alignment without bothering the user with layout questions.
+- **Fact Audit & Zero-Drift protocol**: Audits codebase facts against existing documentation; reports `Fact Audit: 100% In Sync` on healthy READMEs with non-destructive enhancement options instead of forced rewrites.
+- **4 Persona Wording Lenses**: Adapts vocabulary, tone, and value emphasis across Developer, Product, End-User, and Ops/Admin perspectives while strictly preserving standard GitHub README section architecture.
+- **Collaborative scoping gate**: Pauses before writing to align on Wording Lens and Key Highlights in one focused turn (or safely bypasses under `--non-interactive`).
 - **Global readability standards (ESL & WIIFM)**: Enforces Flesch-Kincaid Grade $\le$ 9, active voice, short noun phrases without modifier stacking, and a clear "What's in it for me" opening.
 - **Modern GitHub visual presentation**: Supports context-aware Centered Hero Headers with logos, flat-square badges, quick links navigation, GFM callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`), and collapsible `<details>` blocks.
 - **Anti-duplication & Anti-leakage guardrails**: Uses concise single-line links for `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, and `SECURITY.md`. Never leaks credentials, database rules, internal schemas, or CI/CD internals.
@@ -130,7 +135,7 @@ Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $tmp
 
 ## Usage
 
-Ask your agent to document a repository or invoke `/readme-generator`. The skill silently inspects the codebase, reports findings, and pauses at the Collaborative Scoping Gate to align on audience, scope, layout, and highlights before editing files.
+Ask your agent to document a repository or invoke `/readme-generator`. The skill silently inspects the codebase, runs a Fact Audit against existing documentation, and pauses at the Collaborative Scoping Gate to align on Wording Lens and Key Highlights before editing files.
 
 > [!NOTE]
 > To bypass confirmation and generate immediately with recommended defaults, include `--non-interactive` or specify `"viết luôn không cần hỏi"`.
@@ -165,7 +170,7 @@ readme-generator/
 ├── .agents/plugins/              # Codex marketplace
 ├── docs/
 │   ├── banner.png                # Repository showcase banner
-│   └── logo/                     # M.O.B Signal logo assets
+│   └── logo/                     # Vector logo assets
 ├── skills/readme-generator/
 │   ├── SKILL.md                  # Workflow and rules
 │   ├── references/               # Archetypes, style, and anti-leakage guidance
