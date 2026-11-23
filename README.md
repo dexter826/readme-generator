@@ -18,7 +18,7 @@
   </p>
 
   <p align="center">
-    <a href="#demo">Demo</a> •
+    <a href="#how-it-works">How It Works</a> •
     <a href="#capabilities">Capabilities</a> •
     <a href="#execution-modes--compatibility">Compatibility</a> •
     <a href="#installation">Installation</a> •
@@ -35,14 +35,14 @@
 
 `readme-generator` is a cross-platform AgentSkill and plugin for Antigravity, Claude Code, Codex, and Gemini CLI. It silently inspects codebase facts—runtimes, dependencies, entrypoints, verified scripts, environment keys, and local media—to generate or update production-grade `README.md` documentation aligned with project requirements.
 
-## Demo
+## How It Works
 
 https://github.com/user-attachments/assets/1af09d48-ba50-4788-a016-4b6abf88564e
 
 ## Capabilities
 
 - **Codebase-first discovery**: Inspects manifests, entrypoints, scripts, environment variable names, licenses, and local visual assets from real repository files.
-- **Zero-question visual conventions**: Automates responsive logo `<picture>` blocks, repository banner hero placement, demo video sections, and badge alignment without bothering the user with layout questions.
+- **Zero-question visual conventions**: Automates responsive logo `<picture>` blocks, repository banner hero placement, visual workflow or demo video sections, and badge alignment without bothering the user with layout questions.
 - **Fact Audit & Zero-Drift protocol**: Audits codebase facts against existing documentation; reports `Fact Audit: 100% In Sync` on healthy READMEs with non-destructive enhancement options instead of forced rewrites.
 - **4 Persona Wording Lenses**: Adapts vocabulary, tone, and value emphasis across Developer, Product, End-User, and Ops/Admin perspectives while strictly preserving standard GitHub README section architecture.
 - **Collaborative scoping gate**: Pauses before writing to align on Wording Lens and Key Highlights in one focused turn (or safely bypasses under `--non-interactive`).

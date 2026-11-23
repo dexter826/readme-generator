@@ -82,9 +82,10 @@ Never ask the user how or where to format visual assets. The skill applies **Zer
 4. **Repository Banner Image**: When a banner image (`docs/banner.png` or `assets/banner.png`) exists:
    - Place as a clean, responsive hero banner immediately below the title or badge row.
    - Use `<img src="docs/banner.png" alt="Project Banner" width="100%" />` to ensure seamless scaling.
-5. **Demo Video**: When a video asset (`.mp4`) or hosted GitHub asset URL is present:
-   - Create a dedicated `## Demo` section directly after the Summary / Capabilities section.
-   - Use GitHub asset video syntax or an interactive link card instead of burying it in a tiny footnote.
+5. **Video Asset**: When a video asset (`.mp4`) or hosted GitHub asset URL is present:
+   - Determine section role from content: For live CLI or interactive screencasts, title the section `## Demo`. For animated workflow explainers or pipeline visualizations, title it `## How It Works` or `## Visual Workflow`.
+   - Place directly after the Summary or Capabilities section.
+   - Use GitHub asset video syntax or an interactive link card with a concise caption describing the visual flow.
 6. **Quick Navigation Bar**: For centered hero headers, automatically include anchor navigation separated by `•`:
    `[Features](#features) • [Quick Start](#quick-start) • [Configuration](#configuration) • [Contributing](#contributing) • [License](#license)`
 
