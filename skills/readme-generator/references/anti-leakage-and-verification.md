@@ -1,6 +1,6 @@
 # Anti-Leakage Boundary and Pre-Delivery Verification
 
-A README helps users and contributors adopt or run the codebase safely. Protecting internal boundaries, verifying every technical claim against real files, and ensuring alignment with user decisions prevents security leaks, broken onboarding steps, and documentation drift.
+A README helps users and contributors adopt or run the codebase safely. Protecting internal boundaries, verifying every technical claim against real files, and ensuring alignment with project requirements prevents security leaks, broken onboarding steps, and documentation drift.
 
 ## 1. Anti-Leakage Boundary (Strict Exclusions)
 
@@ -33,7 +33,10 @@ Never expose the following categories in a README, even if present in repository
 
 Before delivering or writing `README.md`, audit every item below directly against the files you inspected and the decisions aligned with the user:
 
-- [ ] **Collaborative Scoping Gate passed**: Target Audience, Documentation Scope, Key Highlights, and Header Layout were confirmed with the user in Phase 2 (or explicitly bypassed via `--non-interactive`).
+- [ ] **Collaborative Scoping Gate passed**: Wording Lens (Developer / Product / End-User / Ops) and Key Highlights were aligned in Phase 2 (or explicitly bypassed via `--non-interactive`).
+- [ ] **Zero-Question Visuals applied**: Layout, logo `<picture>`, banner placement, video player block, and badges were automated based on discovered assets without bothering the user with formatting questions.
+- [ ] **Fact Audit & Drift verified**: If an existing README was present, drift was evaluated honestly. Zero-drift documentation was not arbitrarily rewritten or nitpicked.
+- [ ] **Wording Lens consistency**: Vocabulary, tone, and value emphasis strictly align with the selected lens across the tagline, feature bullets, quickstart, and configuration.
 - [ ] **Commands verified**: Every install, dev, build, test, lint, migration, and Docker command matches actual scripts in manifests, `Makefile`, `Dockerfile`, or CLI entrypoints.
 - [ ] **Paths verified**: Every file path, directory tree item, relative link, and image reference resolves on disk.
 - [ ] **Environment variables verified**: Every documented variable name matches `.env.example` or actual config parsing code, with zero real secret values exposed.
