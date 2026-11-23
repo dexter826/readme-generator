@@ -4,14 +4,14 @@ Determine repository roles from actual codebase signals instead of forcing proje
 
 ## 1. Archetype Detection Signals
 
-| Archetype | Typical Codebase Signals | Primary Reader Question |
-| :--- | :--- | :--- |
-| **Application** (Web / Mobile / Desktop) | UI framework (`next`, `react`, `vue`, `svelte`, `flutter`, `electron`, `tauri`), pages/routes, public assets, `.env.example` | What does this app do, and how do I configure and run it locally? |
-| **Backend API / Service** | HTTP/gRPC/GraphQL server (`fastapi`, `express`, `nestjs`, `gin`, `axum`, `spring`), route handlers, `Dockerfile`, `compose.yaml`, migrations | What service does this expose, how do I run it (local or Docker), and how is it configured? |
-| **Library / SDK** | Exported modules (`exports`, `main`, `lib.rs`, `__init__.py`), package metadata without standalone server entrypoint, API tests | How do I install it, import it, and call the public API? |
-| **CLI Tool** | Executable entrypoints (`bin` in `package.json`, `[project.scripts]`, `cmd/`, `clap`/`cobra`/`commander`/`typer`), flags/subcommands | How do I install it and what commands/flags does it support? |
-| **Monorepo / Workspace** | `pnpm-workspace.yaml`, `turbo.json`, `nx.json`, Cargo/Go/uv workspaces, `apps/` and `packages/` directories | How is the workspace organized, what lives in each package, and how do root commands run? |
-| **Plugin / Agent Skill / Template** | `SKILL.md`, `plugin.json`, `.claude-plugin/`, extension manifests, `references/`, `assets/` | What capability does it add, which runtimes does it support, and how do I install or trigger it? |
+| Archetype | Typical Codebase Signals | Default Wording Lens | Primary Reader Question |
+| :--- | :--- | :--- | :--- |
+| **Application** (Web / Mobile / Desktop) | UI framework (`next`, `react`, `vue`, `svelte`, `flutter`, `electron`, `tauri`), pages/routes, public assets, `.env.example` | **Product** / **End-User** | What does this app do, and how do I configure and run it locally? |
+| **Backend API / Service** | HTTP/gRPC/GraphQL server (`fastapi`, `express`, `nestjs`, `gin`, `axum`, `spring`), route handlers, `Dockerfile`, `compose.yaml`, migrations | **Developer** / **Ops** | What service does this expose, how do I run it (local or Docker), and how is it configured? |
+| **Library / SDK** | Exported modules (`exports`, `main`, `lib.rs`, `__init__.py`), package metadata without standalone server entrypoint, API tests | **Developer** | How do I install it, import it, and call the public API? |
+| **CLI Tool** | Executable entrypoints (`bin` in `package.json`, `[project.scripts]`, `cmd/`, `clap`/`cobra`/`commander`/`typer`), flags/subcommands | **End-User** / **Developer** | How do I install it and what commands/flags does it support? |
+| **Monorepo / Workspace** | `pnpm-workspace.yaml`, `turbo.json`, `nx.json`, Cargo/Go/uv workspaces, `apps/` and `packages/` directories | **Developer** | How is the workspace organized, what lives in each package, and how do root commands run? |
+| **Plugin / Agent Skill / Template** | `SKILL.md`, `plugin.json`, `.claude-plugin/`, extension manifests, `references/`, `assets/` | **Developer** / **End-User** | What capability does it add, which runtimes does it support, and how do I install or trigger it? |
 
 ---
 
@@ -51,10 +51,10 @@ When a repository contains unusual top-level directories, specialized automation
 
 ## 4. Section Composition by Archetype
 
-### Core Sections (Universal)
+### Core Sections (Universal across all Archetypes & Wording Lenses)
 
-1. **Header Block**: Centered Hero Header (with Logo, Tagline, Badges, Quick Links bar) or Left-aligned standard H1 per agreed Phase 2 layout.
-2. **Summary (WIIFM)**: 1–2 direct sentences stating what the software is and the concrete problem it solves for the reader.
+1. **Header Block**: Centered Hero Header (with Logo, Tagline, Badges, Quick Links bar) or Left-aligned standard H1 per automated visual conventions.
+2. **Summary (WIIFM)**: 1–2 direct sentences stating what the software is and the concrete problem it solves, tuned to the chosen Wording Lens.
 3. **Key Capabilities**: Concise bullets describing real, implemented functionality observed in code.
 4. **Quick Start / Installation & Running**: Exact verified prerequisites and setup/run commands.
 5. **Configuration**: Environment variables (`.env.example`) or config parameters with types and defaults.
@@ -71,7 +71,7 @@ When a repository contains unusual top-level directories, specialized automation
   - **API Reference**: Markdown table or concise signatures of primary public functions, parameters, and return types.
 - **CLI Tools**:
   - **Synopsis & Examples**: `<tool> <command> [options]` plus 2–3 realistic command examples verified against parser.
-  - **Commands & Flags**: Markdown table of subcommands and flags. For extensive flag lists (>8 items), wrap in `<details><summary>`.
+  - **Commands & Flags**: Markdown table of subcommands and flags. For extensive flag lists (>8 flags), wrap in `<details><summary>`.
 - **Monorepos**:
   - **Workspace Index**: Table linking directly to `[packages/core](./packages/core)` with one-line roles.
   - **Workspace Commands**: Root-level dev, build, test, and lint commands.
@@ -81,16 +81,32 @@ When a repository contains unusual top-level directories, specialized automation
 
 ---
 
-## 5. Handling Existing `README.md` & Diff Report
+## 5. Fact Audit, Drift Matrix & Zero-Drift Handling
 
-When an existing `README.md` is detected in Phase 1, never make unilateral decisions on whether to overwrite or keep sections.
+When an existing `README.md` is detected in Phase 1, the skill audits the existing text against codebase reality:
 
-### Mandatory Diff & Upgrade Report Format (Phase 2)
+### 5.1 Case A: Zero Drift (100% In Sync)
 
-Compile a concise audit table before presenting the interactive scoping turn:
+When all commands, environment variables, dependencies, and file links in the existing README match current repository files:
+- **Do NOT force a rewrite or nitpick healthy text.**
+- Output a clear **Fact Audit Verdict**:
+  ```markdown
+  ### Fact Audit: 100% In Sync
+  All commands, scripts, dependencies, and configuration variables in README.md match the codebase.
+  ```
+- Ask the user in Phase 2 if they want targeted enhancements:
+  1. **Tune Wording Lens**: Shift perspective (e.g. from Developer to Product or End-User lens).
+  2. **Prose & ESL Polish**: Simplify sentence structures to Grade $\le$ 9, remove passive voice, tighten WIIFM.
+  3. **Add Specialized Section**: Add FAQ, Benchmarks, Troubleshooting, or an Architecture diagram.
+  4. **Keep As-Is**: Confirm healthy state and exit without changes.
+
+### 5.2 Case B: Drift Detected (Stale Facts or New Features)
+
+When commands fail, scripts are missing, or new packages/env vars exist:
+- Compile a concise **Fact Audit & Drift Matrix**:
 
 ```markdown
-### Existing README.md Audit
+### Existing README.md Audit & Drift Report
 
 | Section / Asset | Codebase Verification | Recommendation |
 | :--- | :--- | :--- |
@@ -98,9 +114,10 @@ Compile a concise audit table before presenting the interactive scoping turn:
 | Quick Start commands (`npm start`) | `package.json` now uses `pnpm dev` | **Upgrade command** |
 | Custom FAQ / Deployment notes | Valid operational context written by user | **Preserve** |
 | Deprecated env var `OLD_API_KEY` | Removed from `.env.example` & codebase | **Remove** |
+| New CLI flag `--format` | Implemented in `src/cli.ts` but missing in doc | **Add to flags table** |
 ```
 
-### Update Strategies to Propose:
-1. **Preserve-and-upgrade (Recommended for custom docs)**: Keep valid custom sections, diagrams, and domain notes while updating stale commands, broken paths, and aligning formatting/ESL prose.
-2. **Replace cleanly**: Rebuild fresh documentation from current codebase facts (preserving local media paths if still relevant). Best for boilerplate or severely drifted READMEs.
-3. **Surgical update**: Modify only specific broken commands or outdated tables without touching surrounding text.
+- Propose update strategies:
+  1. **Preserve-and-upgrade (Recommended for custom docs)**: Keep valid custom sections, diagrams, and domain notes while updating stale commands, broken paths, and aligning formatting/ESL prose.
+  2. **Surgical update**: Modify only specific broken commands or outdated tables without touching surrounding text.
+  3. **Replace cleanly**: Rebuild fresh documentation from current codebase facts (preserving local media paths if still relevant). Best for boilerplate or severely drifted READMEs.

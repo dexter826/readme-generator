@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "readme-generator",
-  "version": "1.1.0",
-  "description": "Generate or update evidence-grounded README.md files for any repository, in English or Vietnamese, with collaborative scoping, ESL readability, and modern GitHub presentation.",
+  "version": "1.2.0",
+  "description": "Generate or update evidence-grounded README.md files for any repository with zero-question visuals, fact audit integrity checks, and 4 persona wording lenses.",
   "author": {
     "name": "dexter826"
   },
@@ -15,6 +15,8 @@
     "docs",
     "markdown",
     "esl",
-    "github-markdown"
+    "github-markdown",
+    "fact-audit",
+    "wording-lenses"
   ]
 }
