@@ -1,7 +1,7 @@
 {
   "name": "readme-generator",
-  "version": "1.0.1",
-  "description": "Generate or update evidence-grounded README.md files for any repository, in English or Vietnamese, with anti-leakage guardrails.",
+  "version": "1.1.0",
+  "description": "Generate or update evidence-grounded README.md files for any repository, in English or Vietnamese, with collaborative scoping, ESL readability, and modern GitHub presentation.",
   "author": {
     "name": "dexter826"
   },

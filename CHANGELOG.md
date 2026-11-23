@@ -4,11 +4,23 @@ All notable changes to `readme-generator` are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2026-11-24
 
 ### Added
 
-- Plugin distribution manifests (`plugin.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.agents/plugins/marketplace.json`, `.antigravity-plugin/plugin.json`) so the repository installs directly as a plugin on Claude Code, Codex, and Antigravity, with a matching install section in `README.md`.
+- **Phase 2 Collaborative Discovery & Scoping Gate**: Replaced autonomous fast-path execution with an interactive scoping gate that pauses after silent discovery to present findings and align on Target Audience, Documentation Scope, Key Highlights, Visual Layout, and Existing README Update Strategy using interactive multiple-choice tools (`ask_question`).
+- **ESL & Global Readability Standards**: Integrated international technical writing guidelines into `references/writing-and-style.md` (Flesch-Kincaid $\le$ Grade 9, active voice, short noun phrases without modifier stacking, 1 concept per sentence, explicit logical transitions, and direct "What's in it for me" WIIFM opening formula).
+- **Modern GitHub Presentation & Centered Hero Header**: Added context-aware Centered Hero Header pattern (`<div align="center">`) with Logo, Title, WIIFM Tagline, Flat-Square Badges, and Quick Links navigation bar for applications, CLIs, plugins, and repositories with visual assets.
+- **GFM Admonitions & Collapsible Details**: Standardized GitHub callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`) replacing decorative emojis, and introduced `<details><summary>` collapsible blocks for secondary technical references (CLI flag matrices, advanced configs).
+- **Anti-Duplication Rule for Satellite Files**: Enforced strict single-line referencing for `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, `SECURITY.md`, and `CODE_OF_CONDUCT.md` to prevent bloated, duplicate documentation.
+- **Existing README Diff & Upgrade Report**: Mandated a comparative audit table (*Preserve* vs *Upgrade command/env* vs *Remove*) before proposing update modes on existing custom READMEs.
+- **Directory Glossary (GNU Standards)**: Added guidance for concisely documenting non-standard top-level directories (`.agents/`, `scripts/`, etc.).
+
+### Changed
+
+- Bumped `metadata.version` in `skills/readme-generator/SKILL.md`, `plugin.json`, `.antigravity-plugin/plugin.json`, and `.claude-plugin/plugin.json` to `1.1.0`.
+- Updated all composable blueprints (`app-and-api.md`, `library-and-cli.md`, `monorepo-and-plugin.md`) to reflect Centered Hero Headers, Quick Links, GFM Callouts, and anti-duplication references.
+- Updated `evals/evals.json` test cases and expectations to verify the collaborative scoping gate, ESL readability, and modern formatting.
 
 ## [1.0.1] - 2026-11-11
 

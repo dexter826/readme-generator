@@ -4,12 +4,28 @@ Composable section blueprint for multi-package workspaces (monorepos) and extens
 
 ## A. Monorepo / Workspace Flow
 
-```markdown
+```html
+<div align="center">
+
+<!-- Optional: monorepo logo or banner -->
+<img src="./docs/logo.svg" alt="Workspace Logo" width="120" />
+
 # <Workspace Name>
 
-<1-2 sentences describing the system across its workspace packages and apps.>
+**<1 declarative sentence describing the system across its packages and apps (WIIFM).>**
 
-## Architecture <!-- Include Mermaid only when workspace dependencies clarify the layout -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/owner/repo/ci.yml?branch=main&style=flat-square)](actions)
+
+[Architecture](#architecture) • [Packages](#workspace-packages) • [Getting Started](#getting-started) • [Contributing](#contributing) • [License](#license)
+
+</div>
+
+---
+```
+
+```markdown
+## Architecture <!-- Include Mermaid when workspace dependencies clarify the system -->
 
 ```mermaid
 flowchart TD
@@ -23,58 +39,105 @@ flowchart TD
 | :--- | :--- | :--- |
 | `<core-pkg>` | [`packages/core`](./packages/core) | Shared domain logic and types |
 | `<cli-pkg>` | [`apps/cli`](./apps/cli) | Command-line interface |
+| `<web-pkg>` | [`apps/web`](./apps/web) | Web dashboard application |
 
 ## Getting Started
 
 ### Prerequisites
 
-- <Verified toolchain versions across workspace manifests>
+- <Verified toolchain versions across workspace manifests (e.g., Node.js >= 20, pnpm >= 9, Go >= 1.22)>
 
 ### Workspace Commands
 
 ```bash
-# Install dependencies across workspace
-<verified workspace install command>
+# Install dependencies across all packages
+pnpm install
 
-# Build / test all packages
-<verified workspace test/build command>
+# Run development mode across workspace
+pnpm dev
+
+# Build and test all packages
+pnpm build
+pnpm test
 ```
 
-## Configuration & License
+> [!TIP]
+> Filter commands to a specific package using `pnpm --filter <pkg-name> <command>`.
 
-- Add environment variable table only if root configuration exists.
-- Include `## License` only when verified `LICENSE` exists and repository is not private.
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for local workspace setup and PR submission guidelines.
+
+## License
+
+Distributed under the [MIT](LICENSE) License.
 ```
+
+---
 
 ## B. Plugin, Extension, or Agent Skill Flow
 
-```markdown
+```html
+<div align="center">
+
+<img src="./docs/logo.svg" alt="Skill Logo" width="120" />
+
 # <Skill or Plugin Name>
 
-<1-2 sentences stating what workflow or capability the skill/plugin adds.>
+**<1 declarative sentence stating what capability the skill/plugin provides to the agent or IDE (WIIFM).>**
 
-## Supported Runtimes / Compatibility
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Platform: Antigravity / Claude Code](https://img.shields.io/badge/Platform-Antigravity%20%7C%20Claude%20Code-purple.svg?style=flat-square)](plugin.json)
 
-- <List only runtimes/hosts verified in skill/plugin manifests, e.g., AgentSkills-compatible coding agents>
+[Overview](#overview) • [Supported Runtimes](#supported-runtimes) • [Installation](#installation) • [Usage](#usage--triggers) • [Structure](#structure) • [License](#license)
+
+</div>
+
+---
+```
+
+```markdown
+## Overview
+
+<2-3 concise sentences detailing the capabilities and workflows enabled by the skill.>
+
+## Supported Runtimes
+
+- **Antigravity**: Native skill support
+- **Claude Code**: Agent skills integration (`~/.claude/skills/`)
+- **Codex / ChatGPT**: Standard MCP & skill format
 
 ## Installation
 
-Provide exact copy, clone, or CLI steps matching how the project is actually distributed (never invent registry commands that do not exist).
+```bash
+# Install into your agent configuration
+git clone <repo-url> ~/.gemini/config/skills/<skill-name>
+```
 
-## Usage / Triggers
+## Usage & Triggers
 
-Show realistic user prompts, slash commands, or configuration examples demonstrating when and how the skill or plugin activates.
+Use natural language prompts to activate the skill:
+
+- *"Create a comprehensive README for this repository"*
+- *"Update our project README after the latest refactoring"*
+
+> [!NOTE]
+> The skill automatically inspects repository manifests, scripts, and entrypoints before proposing documentation changes.
 
 ## Structure
 
 ```text
 .
-├── SKILL.md       # Core instructions and metadata
-├── references/    # On-demand guides
-└── assets/        # Reusable blueprints or resources
+├── SKILL.md       # Core instructions and trigger metadata
+├── references/    # In-depth architectural and style guidelines
+└── assets/        # Composable templates and blueprints
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development workflows and testing guidelines.
 
 ## License
 
-Distributed under the [MIT](LICENSE) license.
+Distributed under the [MIT](LICENSE) License.
 ```

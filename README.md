@@ -9,7 +9,7 @@
 <p align="center">
   <a href="skills/readme-generator/SKILL.md"><img src="https://img.shields.io/badge/standard-AgentSkill-00cc5c?style=flat-square&labelColor=0a0a0a" alt="standard: AgentSkill" /></a>
   <a href="skills/readme-generator/references/writing-and-style.md"><img src="https://img.shields.io/badge/languages-VI%20%7C%20EN-00cc5c?style=flat-square&labelColor=0a0a0a" alt="languages: VI | EN" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.0.1-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.0.1" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.1.0-00cc5c?style=flat-square&labelColor=0a0a0a" alt="version: 1.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-00cc5c?style=flat-square&labelColor=0a0a0a" alt="license: MIT" /></a>
 </p>
 
@@ -20,9 +20,11 @@ Cross-platform AgentSkill for generating and updating evidence-grounded `README.
 ## Capabilities
 
 - **Codebase-first discovery**: Extracts verified runtimes, dependencies, entrypoints, scripts, environment variable names, licenses, and local visual assets from real repository files.
-- **Adaptive clarification gate**: Consolidates ambiguous choices (output language, repository visibility, missing critical metadata, or existing-file strategy) into one concise question turn before editing.
-- **Adaptive archetype composition**: Supports web/mobile/desktop applications, backend APIs, libraries/SDKs, CLI tools, monorepos, plugins/agent skills, and hybrid repositories without forcing fixed line caps.
-- **Anti-leakage guardrails**: Excludes live credentials, database security rules, raw internal schema dumps, CI/CD workflow internals, and private endpoints.
+- **Collaborative scoping gate**: Replaces unilateral assumptions with a single interactive question turn (supporting `ask_question`) to align on target audience, detail depth (minimal vs full), visual layout (centered hero vs standard), and core highlights before writing.
+- **Existing README Diff & Upgrade Report**: Compares valid custom sections against outdated commands and broken environment variables before modifying existing documentation.
+- **Global readability standards (ESL & WIIFM)**: Enforces Flesch-Kincaid Grade $\le$ 9, active voice, short noun phrases (no modifier stacking), and a clear "What's in it for me" opening statement.
+- **Modern GitHub visual presentation**: Supports context-aware Centered Hero Headers with Logo, Tagline, Badges, and Quick Links navigation, GitHub Flavored Markdown (GFM) callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`), and collapsible `<details>` blocks.
+- **Anti-duplication & Anti-leakage guardrails**: Strict single-line referencing for `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, `SECURITY.md`, with zero leakage of live credentials, database security rules, raw internal schemas, or CI/CD internals.
 - **Bilingual output standards**: Supports technical English and natural Vietnamese with complete diacritics and anti-translationese rules.
 
 ## Execution Modes & Compatibility
@@ -109,7 +111,7 @@ Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $tmp
 
 ## Usage
 
-Ask your agent to document a repository or invoke `/readme-generator` when supported. When a repository already contains a `README.md` or lacks key setup details (such as a `LICENSE`, production command, or `.env.example`), the skill asks once how to proceed before modifying files.
+Ask your agent to document a repository or invoke `/readme-generator` when supported. The skill silently inspects your codebase, reports its findings, and pauses at the Collaborative Scoping Gate to align on audience, scope, layout, and highlights before editing files. If you want direct execution without confirmation, include `--non-interactive` or specify "viết luôn không cần hỏi".
 
 ### Example Prompts
 

@@ -1,6 +1,6 @@
 # Anti-Leakage Boundary and Pre-Delivery Verification
 
-A README helps users and contributors adopt or run the codebase safely. Protecting internal boundaries and verifying every technical claim against real files prevents security leaks and broken onboarding steps.
+A README helps users and contributors adopt or run the codebase safely. Protecting internal boundaries, verifying every technical claim against real files, and ensuring alignment with user decisions prevents security leaks, broken onboarding steps, and documentation drift.
 
 ## 1. Anti-Leakage Boundary (Strict Exclusions)
 
@@ -27,15 +27,20 @@ Never expose the following categories in a README, even if present in repository
 | High-level component flow (API -> Queue -> Worker -> Postgres) | Raw SQL/Prisma table columns, internal admin endpoints, CI deploy keys |
 | Confirmed test/lint/build commands (`pytest`, `npm run build`) | Step-by-step CI runner YAML internals and deployment secrets |
 
+---
+
 ## 2. Pre-Delivery Verification Protocol
 
-Before delivering or writing `README.md`, audit every item below directly against the files you inspected:
+Before delivering or writing `README.md`, audit every item below directly against the files you inspected and the decisions aligned with the user:
 
+- [ ] **Collaborative Scoping Gate passed**: Target Audience, Documentation Scope, Key Highlights, and Header Layout were confirmed with the user in Phase 2 (or explicitly bypassed via `--non-interactive`).
 - [ ] **Commands verified**: Every install, dev, build, test, lint, migration, and Docker command matches actual scripts in manifests, `Makefile`, `Dockerfile`, or CLI entrypoints.
 - [ ] **Paths verified**: Every file path, directory tree item, relative link, and image reference resolves on disk.
 - [ ] **Environment variables verified**: Every documented variable name matches `.env.example` or actual config parsing code, with zero real secret values exposed.
 - [ ] **API / CLI surface verified**: Exported functions, parameters, types, route groups, and CLI flags/aliases match actual source code.
+- [ ] **Anti-duplication passed**: Zero full text copied from `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, or `SECURITY.md`. All dedicated satellite files are referenced with concise 1-line links.
+- [ ] **ESL & WIIFM passed**: Opening 1–2 sentences clearly communicate what it is and what problem it solves for the reader (WIIFM). Prose uses active voice, short noun phrases (no modifier stacking), and 1 concept per sentence ($\le$ Grade 9 reading level).
+- [ ] **Formatting & GFM Callouts valid**: If `<div align="center">` or `<details>` is used, HTML tags are properly closed with blank lines around nested markdown; standard `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` callouts used without decorative emoji heading clutter.
 - [ ] **License & visibility verified**: `License` matches an existing `LICENSE` file or explicit user confirmation; private repos do not claim a fabricated license.
 - [ ] **Anti-leakage passed**: Zero secrets, DB security rules, raw internal schemas, CI internals, or internal URLs leaked.
-- [ ] **Style check passed**: Zero marketing buzzwords, zero translationese, language identifiers on every code fence, proper Vietnamese diacritics (when writing in Vietnamese), and clean formatting.
 - [ ] **Honest accounting of gaps**: Any missing info that the user chose to omit (or that could not be verified) is omitted cleanly or flagged in your closing summary rather than filled with guesswork.
