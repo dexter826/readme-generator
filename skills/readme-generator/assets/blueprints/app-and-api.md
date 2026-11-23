@@ -4,35 +4,52 @@ Composable section blueprint for standalone applications (web, mobile, desktop) 
 
 ## Suggested Section Flow
 
-```markdown
+```html
+<div align="center">
+
+<!-- Optional: project logo/icon if available in docs/ or assets/ -->
+<img src="./docs/logo.svg" alt="Project Logo" width="120" />
+
 # <Project Name>
 
-<!-- Optional: local logo or verified stack/license badges -->
+**<1 declarative sentence answering what the app/service does and what's in it for the user (WIIFM).>**
 
-<1-2 declarative sentences stating what the application or service does and what workflow it supports.>
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Runtime](https://img.shields.io/badge/Node.js-%3E%3D20-green.svg?style=flat-square)](package.json)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/owner/repo/ci.yml?branch=main&style=flat-square)](actions)
 
+[Features](#features) • [Quick Start](#quick-start) • [Configuration](#configuration) • [API Overview](#api-overview) • [Contributing](#contributing) • [License](#license)
+
+</div>
+
+---
+```
+
+```markdown
 <!-- Optional: verified screenshot or UI preview when present in docs/ or assets/ -->
+![Application Preview](./docs/preview.png)
 
 ## Features
 
-- **<Capability>**: <Concrete action and verifiable scope>
-- **<Capability>**: <Concrete action and verifiable scope>
+- **<Core Capability>**: <Concrete action and verifiable scope>
+- **<Core Capability>**: <Concrete action and verifiable scope>
 
 ## Architecture <!-- Include only when multiple services/workers/queues interact -->
 
 ```mermaid
 flowchart LR
-    Client --> API["API Service"]
-    API --> DB[("Database")]
+    Client --> Gateway["API Gateway"]
+    Gateway --> Worker["Background Worker"]
+    Gateway --> DB[("PostgreSQL")]
 ```
 
 ## Tech Stack <!-- Keep brief; group by verified runtime layers -->
 
-- **Runtime / Language**: <e.g., Python 3.12 / TypeScript 5>
-- **Framework**: <e.g., FastAPI / Next.js>
-- **Data / Messaging**: <e.g., PostgreSQL / Redis>
+- **Runtime / Language**: Python 3.12 / TypeScript 5
+- **Framework**: FastAPI / Next.js
+- **Data / Cache**: PostgreSQL / Redis
 
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
@@ -42,50 +59,67 @@ flowchart LR
 ### Local Setup
 
 ```bash
-# Example (Python / uv) — replace with actual commands from repo manifests
-uv sync
+# Example (replace with actual commands from repo manifests)
+git clone <repo-url>
+cd <repo-name>
+npm install
 cp .env.example .env
-uv run uvicorn app.main:app --reload
+npm run dev
 ```
 
-### Running with Docker <!-- Include only when Dockerfile or compose.yaml exists -->
-
-```bash
-docker compose up --build
-```
+> [!TIP]
+> You can also run the complete stack with Docker Compose:
+> ```bash
+> docker compose up --build
+> ```
 
 ## Configuration
 
-Declare required environment variables (sourced from `.env.example` or config schema — never expose real `.env` secrets):
+Declare required environment variables (sourced strictly from `.env.example` or config schema — never expose real `.env` secret values):
 
 | Variable | Required | Default | Description |
 | :--- | :---: | :---: | :--- |
 | `PORT` | No | `8000` | HTTP listen port |
-| `DATABASE_URL` | Yes | - | Database connection string |
+| `DATABASE_URL` | Yes | - | PostgreSQL connection string |
+
+> [!WARNING]
+> Ensure `DATABASE_URL` is configured before executing initial database migrations.
 
 ## API Overview <!-- Backend services only: summarize public route groups, never internal auth secrets -->
 
-- Interactive docs: `/docs` (OpenAPI) when running locally
+- Interactive docs: `/docs` (OpenAPI Swagger) when running locally
 - `GET /health` — Service liveness probe
-- `POST /v1/<resource>` — <Verified public action>
+- `POST /v1/<resource>` — <Verified public endpoint action>
 
-## Available Scripts / Commands
+## Available Scripts
 
 | Command | Purpose |
 | :--- | :--- |
 | `<verified test command>` | Run unit and integration tests |
-| `<verified lint command>` | Run static analysis and linting |
+| `<verified lint command>` | Run static analysis and linter |
+| `<verified build command>` | Compile production bundle |
 
-## Project Structure <!-- Optional: keep shallow (1-2 levels) and verified on disk -->
+## Project Structure <!-- Optional: wrap in <details> if extensive -->
+
+<details>
+<summary><strong>Directory Layout</strong></summary>
 
 ```text
 .
-├── app/       # Application entrypoint and route handlers
-├── tests/     # Automated test suite
-└── compose.yaml
+├── src/           # Application entrypoint and route handlers
+│   ├── api/       # HTTP controllers and endpoints
+│   └── services/  # Core business logic
+├── tests/         # Automated test suite
+└── compose.yaml   # Local container orchestration
 ```
+
+</details>
+
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for local development setup and submission guidelines.
 
 ## License <!-- Omit for private repos unless explicitly confirmed -->
 
-Distributed under the [MIT](LICENSE) license.
+Distributed under the [MIT](LICENSE) License.
 ```

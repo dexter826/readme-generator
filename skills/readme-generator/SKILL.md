@@ -5,75 +5,74 @@ description: >-
 license: MIT
 metadata:
   author: "dexter826"
-  version: "1.0.1"
+  version: "1.1.0"
 ---
 
 # README Generator
 
-Write and maintain accurate, readable `README.md` documentation grounded strictly in repository evidence.
+Write and maintain accurate, scannable, and modern `README.md` documentation grounded strictly in repository evidence and aligned collaboratively with user decisions.
 
 ## Core Principles
 
-- **Evidence over assumptions**: Every command, file path, environment variable, API signature, CLI flag, dependency, and license reference must trace directly to inspected repository files or explicit user answers. One broken Quick Start command destroys developer trust faster than a missing section.
-- **Public boundary (anti-leakage)**: A README is a public-facing entrypoint, not an internal operations manual. Never copy real secret values, database security rules, raw internal schema dumps, CI/CD pipeline internals, or private infrastructure endpoints. Read [references/anti-leakage-and-verification.md](./references/anti-leakage-and-verification.md).
-- **Direct technical prose (anti-fluff)**: Avoid promotional hype, vague qualifiers, and AI translationese in both English and Vietnamese. Readers scan a README to answer "what is this?", "does it fit my problem?", and "how do I run or install it?". Read [references/writing-and-style.md](./references/writing-and-style.md).
-- **Adaptive scope**: Match sections, structure, and length to the repository's actual role and complexity (including hybrid repositories) instead of forcing every codebase into a rigid template or fixed line count. Read [references/archetypes-and-sections.md](./references/archetypes-and-sections.md).
-- **Ask instead of guessing**: Never silently overwrite existing custom documentation or silently invent missing critical facts (such as a license, undocumented environment variables, or unverified production commands). Clarify gaps in one focused turn before editing.
+- **Evidence over assumptions**: Every command, file path, environment variable, API signature, CLI flag, dependency, and license reference must trace directly to inspected repository files or explicit user answers. One broken Quick Start command destroys developer trust.
+- **Collaborative scoping over unilateral guessing**: Never unilaterally decide documentation depth, audience, visual layout, or overwrite custom docs without consulting the user. Discover facts silently first, then align design decisions in a focused interactive turn.
+- **Global technical clarity (ESL & WIIFM)**: Value clarity over literary complexity. Aim for an accessible Flesch-Kincaid reading level ($\le$ Grade 9), active voice, short noun phrases (no modifier stacking), and open with a direct "What's in it for me" (WIIFM) statement. Read [references/writing-and-style.md](./references/writing-and-style.md).
+- **Modern GitHub visual presentation**: Support context-aware Centered Hero Headers (Logo, Title, Tagline, Badges, Quick Links bar) for user-facing apps, CLIs, and repos with visual branding, while keeping pure core libraries clean and left-aligned. Use GitHub Flavored Markdown (GFM) callouts (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`) instead of decorative emojis.
+- **Anti-duplication & public boundary**: Never duplicate dedicated standalone files (`CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE`, `SECURITY.md`) into bloated README sections — link to them concisely. Never leak real secrets, DB security rules, raw schemas, or CI/CD internals. Read [references/anti-leakage-and-verification.md](./references/anti-leakage-and-verification.md).
 
 ## Execution Workflow
 
 ### Phase 1: Silent Codebase Discovery
 
-Inspect the repository using your available file-reading and search tools before asking the user any factual questions you can answer yourself:
+Inspect the repository using file-reading and search tools before asking the user any factual questions you can answer yourself:
 
-1. **Manifests and ecosystem**: Check root and package manifests (`package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `pom.xml`, `composer.json`, `SKILL.md`, `plugin.json`) and workspace definitions (`pnpm-workspace.yaml`, `turbo.json`, `nx.json`, Cargo/Go workspaces).
-2. **Entrypoints and architecture**: Locate main entrypoints, API routes/controllers, CLI bin definitions, exported library modules, and container configs (`Dockerfile`, `compose.yaml` / `docker-compose.yml`).
+1. **Manifests and ecosystem**: Check manifests (`package.json`, `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `pom.xml`, `composer.json`, `SKILL.md`, `plugin.json`) and workspace definitions (`pnpm-workspace.yaml`, `turbo.json`, `nx.json`, Cargo/Go workspaces).
+2. **Entrypoints and architecture**: Locate main entrypoints, API routes/controllers, CLI bin definitions, exported library modules, and container configs (`Dockerfile`, `compose.yaml`).
 3. **Runnable commands**: Extract verified scripts and task targets from manifests, `Makefile`, `justfile`, or container definitions.
-4. **Configuration surface**: Inspect `.env.example`, `.env.template`, and config loaders to collect variable *names* and safe defaults. Never read or copy secret values from `.env` or credential files into documentation.
+4. **Configuration surface**: Inspect `.env.example`, `.env.template`, and config loaders for variable *names* and safe defaults. Never read or copy secret values from `.env` or credential files into documentation.
 5. **Licensing, visibility, assets, and existing docs**:
-   - Check `LICENSE` files and private markers (`"private": true`, internal registry settings).
-   - Check CI workflow files only to confirm whether verified status badges/checks exist, never to copy workflow implementation details.
-   - Check `docs/`, `assets/`, or `.github/` for real screenshots, logos, or diagrams.
-   - Inspect any existing `README.md` to classify whether it is missing/empty, framework boilerplate, or custom documentation.
+   - Check `LICENSE` files and private markers (`"private": true`).
+   - Check `docs/`, `assets/`, or `.github/` for real screenshots, logos, banners, or diagrams.
+   - Inspect any existing `README.md` to classify whether it is missing/empty, framework boilerplate, or custom documentation. Check for satellite files (`CONTRIBUTING.md`, `CHANGELOG.md`).
 
-### Phase 2: Single Consolidated Clarification Gate
+### Phase 2: Collaborative Discovery & Scoping Gate
 
-Before creating or modifying `README.md`, check whether any user decision or missing fact remains unresolved:
+Never proceed straight to writing without consulting the user. Pause and conduct a focused alignment turn:
 
-1. **Existing `README.md` present** (including framework boilerplate such as default Next.js, Vite, or Cargo starter READMEs): Summarize what currently exists (custom sections, local screenshots/badges, or boilerplate) and ask the user how to proceed:
-   - **Replace cleanly**: Build a fresh structure from current repo facts (preserving valid local media paths when still relevant).
-   - **Preserve-and-upgrade**: Keep valid custom sections, badges, and media while updating stale commands/paths and tightening prose.
-   - **Surgical update**: Modify only specific outdated or broken sections.
-2. **Ambiguous framing**: Output language (English vs Vietnamese) or repository visibility (open-source vs private/internal) is unclear from the prompt and manifests.
-3. **Missing critical facts**: Essential details cannot be verified from the codebase — such as missing `LICENSE`, absent `.env.example` for environment variables referenced in code, unclear production/deploy commands, or unverified external demo/docs links. Present the verified facts you found, then ask the user to supply the missing items or confirm omitting them.
+1. **Discovery Briefing**:
+   - Summarize detected facts: Primary archetype, detected tech stack, verified runnable commands, configuration keys, and visual assets found.
+   - **Existing README Diff & Upgrade Report** (if custom `README.md` exists): Present a concise comparison table: *Valid custom sections & assets to preserve* vs *Outdated commands, broken links, or stale env vars to upgrade*.
+2. **Interactive Scoping Turn**:
+   - Present consolidated design decisions in **one focused turn**. If an interactive question tool (`ask_question`) is available, use it with a recommended default per question (`(Recommended)`); otherwise provide short numbered questions with clear recommended choices (`➡️`).
+   - Settle the design frontier:
+     - **Audience & Context**: Target reader (End-users, Open-source contributors, Internal team) and context (New repository, Post-refactor overhaul, Multi-repo standardization).
+     - **Scope & Depth**: Minimal Quickstart (<80 lines, fast onboarding) vs Comprehensive Guide (full architecture, config tables, troubleshooting).
+     - **Layout & Visuals**: Centered Hero Header (with Logo, Badges, Quick Links bar) vs Left-aligned standard GFM; include Mermaid architecture diagram or directory tree.
+     - **Core Highlights**: Confirm 2–4 key capabilities/modules to spotlight at the top.
+     - **Update Strategy** (if existing `README.md` present): *Replace cleanly*, *Preserve-and-upgrade*, or *Surgical update*.
 
-**How to ask:** Consolidate every open question into **one concise turn**. If your environment offers an interactive multiple-choice question tool, use it with a recommended default per item; otherwise present short numbered questions with recommended defaults so the user can confirm quickly.
-
-**Fast path:** Skip Phase 2 and proceed directly to Phase 3 when **all** of the following hold:
-- No `README.md` exists yet (or the user explicitly instructed how to handle the existing file, e.g., overwrite/replace or keep sections).
-- Output language and repository visibility are unambiguous.
-- No critical setup or usage facts are missing from the codebase.
-
-*Note for non-interactive runs:* If you are explicitly instructed to proceed without waiting for user input, apply the safest non-destructive choice, omit unverified claims rather than inventing them, and explicitly report all unresolved gaps in your final summary.
+*Non-interactive bypass:* Proceed directly to Phase 3 without waiting ONLY when the user explicitly commands it in their initial prompt (e.g. `--non-interactive`, "viết luôn không cần hỏi", "generate directly without asking"), applying the safest non-destructive choices and reporting omissions.
 
 ### Phase 3: Compose or Update `README.md`
 
-1. Load [references/archetypes-and-sections.md](./references/archetypes-and-sections.md) to identify the repository's primary (and any secondary) archetype and select the matching structural sections.
-2. Load only the relevant blueprint file(s) from `assets/blueprints/` as compositional inspiration (never copy example ecosystems or assumptions blindly):
+1. Load [references/archetypes-and-sections.md](./references/archetypes-and-sections.md) to structure the document according to the chosen archetype, scope, and satellite file linking rules.
+2. Load only the relevant blueprint file(s) from `assets/blueprints/` for compositional structure:
    - Applications and backend services: [assets/blueprints/app-and-api.md](./assets/blueprints/app-and-api.md)
    - Reusable libraries and CLIs: [assets/blueprints/library-and-cli.md](./assets/blueprints/library-and-cli.md)
    - Monorepos, plugins, and agent skills: [assets/blueprints/monorepo-and-plugin.md](./assets/blueprints/monorepo-and-plugin.md)
-3. Follow [references/writing-and-style.md](./references/writing-and-style.md) for prose tone (English or natural Vietnamese with diacritics), code fences, conditional Mermaid diagrams, badges, local media, and Table of Contents rules.
-4. For **monorepos**, generate or update the root `README.md` with a workspace overview and package index links by default; generate per-package READMEs only when requested.
+3. Follow [references/writing-and-style.md](./references/writing-and-style.md) for:
+   - Centered Hero Header layout (Logo, Tagline, Badges, Quick Links bar) when selected.
+   - ESL technical writing standards (Flesch-Kincaid $\le$ Grade 9, active voice, no modifier stacking, 1 idea/sentence) or natural Vietnamese with proper diacritics.
+   - GFM Admonitions (`> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`) for callouts and `<details><summary>` for secondary reference tables.
+   - Anti-duplication: Link to `CONTRIBUTING.md`, `CHANGELOG.md`, `LICENSE` concisely.
+4. For **monorepos**, generate or update only the root `README.md` with package index links by default; touch sub-package READMEs only when requested.
 
 ### Phase 4: Pre-Delivery Verification
 
 Before writing or finalizing `README.md`, audit your draft against [references/anti-leakage-and-verification.md](./references/anti-leakage-and-verification.md):
 
-1. Cross-check every shell command, script name, file path, directory tree entry, environment variable name, CLI flag, and exported symbol against actual repo files.
-2. Confirm no secrets, database security rules, raw internal schemas, CI internals, or private URLs appear anywhere in the draft.
-3. Confirm relative links and image paths resolve inside the repository and that any Mermaid block uses valid syntax matching real modules.
-4. Write `README.md` and present a concise final summary covering:
-   - Update mode applied (`created`, `replaced`, `preserve-and-upgrade`, or `surgical update`).
-   - Key verified facts reflected in the README (archetype, commands, configuration, license).
-   - Any sections intentionally omitted or awaiting user input due to missing repo data or privacy boundaries.
+1. **Scoping & Decisions verified**: Confirm output strictly reflects the Scope, Audience, and Highlights agreed in Phase 2.
+2. **Commands & Paths verified**: Every command, script, path, and link resolves against real repository files.
+3. **Anti-Leakage passed**: Zero secrets, DB security rules, raw internal schemas, CI internals, or private endpoints leaked.
+4. **Formatting & Style passed**: Valid GFM syntax, properly closed HTML tags if `<div align="center">` or `<details>` is used, clean GFM callouts, and zero AI-marketing fluff.
+5. Write `README.md` and present a concise summary covering update mode applied, key verified sections included, and any omitted items.

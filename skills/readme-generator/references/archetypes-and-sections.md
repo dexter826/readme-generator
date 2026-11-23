@@ -1,6 +1,6 @@
 # Archetypes, Section Composition, and Existing READMEs
 
-Determine repository roles from actual codebase signals instead of forcing projects into rigid single-stack templates. Hybrid repositories (for example, a backend API paired with a CLI or a monorepo containing both a library and an app) should combine the relevant sections cleanly without repetition.
+Determine repository roles from actual codebase signals instead of forcing projects into rigid single-stack templates. Hybrid repositories (for example, a backend API paired with a CLI or a monorepo containing both a library and an app) should combine relevant sections cleanly without repetition.
 
 ## 1. Archetype Detection Signals
 
@@ -13,55 +13,94 @@ Determine repository roles from actual codebase signals instead of forcing proje
 | **Monorepo / Workspace** | `pnpm-workspace.yaml`, `turbo.json`, `nx.json`, Cargo/Go/uv workspaces, `apps/` and `packages/` directories | How is the workspace organized, what lives in each package, and how do root commands run? |
 | **Plugin / Agent Skill / Template** | `SKILL.md`, `plugin.json`, `.claude-plugin/`, extension manifests, `references/`, `assets/` | What capability does it add, which runtimes does it support, and how do I install or trigger it? |
 
-## 2. Section Composition
+---
 
-Include only sections backed by real repository evidence. Keep the top of the README scannable so readers reach installation or usage quickly.
+## 2. Anti-Duplication Rule for Dedicated Satellite Files
 
-### Core Sections (Nearly All Projects)
+A README is an index and overview, not an archive. When dedicated root files exist in the repository, **never copy or summarize their full text into the README**. Always provide a concise, single-line reference:
 
-1. **Title & Local Logo**: Single `# Project Name` matching the manifest or repo purpose. Include a local logo image only if an asset exists in the repository.
-2. **Badges (Conditional)**: Place immediately below the title only when backed by verified facts (confirmed tech stack, verified license, or real package/CI workflow files). Never invent CI status, coverage, or deploy badges.
-3. **Summary**: 1–2 direct sentences stating what the software does and who or what workflow it serves.
-4. **Key Capabilities**: Concise bullets describing real, implemented functionality observed in the code.
-5. **Table of Contents (Conditional)**: Add only for longer documents (roughly >120 lines or multi-package/API references) where navigation materially helps readers.
-6. **Quick Start / Installation & Running**: Prerequisites (versions verified from manifests, `engines`, `.nvmrc`, `Dockerfile`, or `pyproject.toml`) followed by exact setup and run commands.
-7. **License**: Reference the actual `LICENSE` file (`[MIT](LICENSE)`, `[Apache-2.0](LICENSE)`). Omit for private/internal repositories unless the user asks otherwise.
+| Standalone File | What to Avoid in README | Correct README Reference |
+| :--- | :--- | :--- |
+| `LICENSE` | Full legal text, copyright disclaimers, warranty exclusions | `Distributed under the [MIT](LICENSE) License.` |
+| `CONTRIBUTING.md` | Detailed Git branching rules, PR templates, commit guidelines | `Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup and submission guidelines.` |
+| `CHANGELOG.md` | Version-by-version release notes, historic diff logs | `See [CHANGELOG.md](CHANGELOG.md) for release history and migration notes.` |
+| `SECURITY.md` | Vulnerability disclosure policy details | `To report a security vulnerability, please follow our [Security Policy](SECURITY.md).` |
+| `CODE_OF_CONDUCT.md` | Full community code of conduct text | `Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before participating.` |
+
+---
+
+## 3. Directory Glossary (GNU Standards)
+
+When a repository contains unusual top-level directories, specialized automation folders, or domain-specific layouts that new contributors would not immediately recognize, include a compact Directory Glossary:
+
+```markdown
+## Repository Structure
+
+```text
+.
+├── apps/               # User-facing applications (Next.js web and Electron desktop)
+├── packages/           # Shared libraries (core engine, UI tokens, API client)
+├── .agents/            # Agent skill definitions and automation workflows
+└── scripts/            # Build, packaging, and benchmark automation scripts
+```
+```
+
+*Rule:* Only explain top-level directories that warrant explanation. Never list standard self-explanatory folders (like `node_modules/` or `dist/`).
+
+---
+
+## 4. Section Composition by Archetype
+
+### Core Sections (Universal)
+
+1. **Header Block**: Centered Hero Header (with Logo, Tagline, Badges, Quick Links bar) or Left-aligned standard H1 per agreed Phase 2 layout.
+2. **Summary (WIIFM)**: 1–2 direct sentences stating what the software is and the concrete problem it solves for the reader.
+3. **Key Capabilities**: Concise bullets describing real, implemented functionality observed in code.
+4. **Quick Start / Installation & Running**: Exact verified prerequisites and setup/run commands.
+5. **Configuration**: Environment variables (`.env.example`) or config parameters with types and defaults.
+6. **License & Contributing**: Single-line links to `LICENSE` and `CONTRIBUTING.md`.
 
 ### Conditional Sections by Archetype
 
 - **Applications & Backend Services**:
-  - **Architecture Overview (Conditional)**: Add a short Mermaid diagram (`flowchart` or `sequenceDiagram`) only when multiple services, queues, databases, or modules interact in a way prose cannot capture cleanly. Every node must match real modules/services.
-  - **Configuration / Environment Variables**: Document variable *names*, whether required, defaults, and safe descriptions sourced from `.env.example` or config parsers.
-  - **API / Endpoints Overview (Backend APIs)**: Summarize high-level route groups, auth mechanism at a conceptual level, or OpenAPI/Swagger path (`/docs`) without leaking internal secrets or security rules.
-  - **Available Scripts / Docker**: Table or snippet of verified root commands (`dev`, `build`, `test`, `lint`, `docker compose up`).
-  - **Project Structure**: Compact top-level tree showing real source directories only when helpful for contributors.
+  - **Architecture Overview**: Mermaid diagram (`flowchart LR/TD`) when multiple services, queues, or databases interact.
+  - **API / Endpoints Overview**: High-level route groups and Swagger/OpenAPI path (`/docs`), without leaking internal secrets.
+  - **Available Scripts / Docker**: Table of verified commands (`dev`, `build`, `test`, `docker compose up`).
 - **Libraries & SDKs**:
-  - **Installation**: Package manager install command matching the package registry/manifest.
-  - **Quick Start**: Minimal runnable import-and-call snippet using real exported symbols and realistic arguments.
-  - **API Reference**: Document primary public functions, classes, options, parameters, and return types verified in source code. Link to deeper `docs/` if the API surface is large.
+  - **Quick Start**: Minimal runnable import-and-call snippet using real exported symbols.
+  - **API Reference**: Markdown table or concise signatures of primary public functions, parameters, and return types.
 - **CLI Tools**:
-  - **Installation**: Global install, `npx`/`uvx`, or binary build instructions matching the manifest.
-  - **Usage & Examples**: Synopsis (`<tool> <command> [options]`) plus 2–3 realistic command examples verified against the CLI parser.
-  - **Commands & Options**: Clean Markdown table of actual subcommands, flags, aliases, and defaults.
+  - **Synopsis & Examples**: `<tool> <command> [options]` plus 2–3 realistic command examples verified against parser.
+  - **Commands & Flags**: Markdown table of subcommands and flags. For extensive flag lists (>8 items), wrap in `<details><summary>`.
 - **Monorepos**:
-  - **Workspace Overview & Architecture**: Explain how apps and shared packages fit together (optional Mermaid dependency diagram when non-trivial).
-  - **Packages / Apps Index**: Markdown table linking directly to each workspace directory (`[packages/core](./packages/core)`) with a one-line role summary.
+  - **Workspace Index**: Table linking directly to `[packages/core](./packages/core)` with one-line roles.
   - **Workspace Commands**: Root-level dev, build, test, and lint commands.
-  - Generate or update **only the root `README.md`** by default; touch sub-package READMEs only when explicitly asked.
-- **Plugins, Extensions, & Agent Skills**:
-  - **Compatibility / Supported Runtimes**: Runtimes or hosts verified from manifests/frontmatter.
-  - **Installation**: Exact copy/clone/package manager/plugin install steps.
-  - **Usage / Triggers**: Realistic prompts, commands, or hook lifecycle overview.
-  - **Repository Structure**: Brief overview of skill/plugin files if helpful for maintainers or contributors.
+- **Plugins & Agent Skills**:
+  - **Compatibility**: Verified host runtimes.
+  - **Installation & Triggers**: Exact install commands and realistic prompt triggers.
 
-## 3. Handling Existing `README.md` Files
+---
 
-Always inspect an existing `README.md` before proposing an update mode in Phase 2:
+## 5. Handling Existing `README.md` & Diff Report
 
-| Existing State | Indicators | Recommended Mode to Propose |
+When an existing `README.md` is detected in Phase 1, never make unilateral decisions on whether to overwrite or keep sections.
+
+### Mandatory Diff & Upgrade Report Format (Phase 2)
+
+Compile a concise audit table before presenting the interactive scoping turn:
+
+```markdown
+### Existing README.md Audit
+
+| Section / Asset | Codebase Verification | Recommendation |
 | :--- | :--- | :--- |
-| **Missing or empty** | No `README.md`, or empty/stub file (<10 lines with title only) | **Create / Replace cleanly** (no gate needed if language/facts are clear) |
-| **Framework boilerplate** | Unmodified starter text from `create-next-app`, `vite`, `cargo init`, `cookiecutter`, etc. | **Replace cleanly** (keep any user-added local images if present) |
-| **Custom documentation** | Project-specific sections, custom screenshots/GIFs, architecture notes, contributor docs, or manual badges | **Preserve-and-upgrade** (keep valid custom sections and verified media; fix stale commands/paths/env vars and remove fluff), or **Surgical update** if only small parts drifted |
+| Architecture diagram (`docs/arch.svg`) | File exists and matches current modules | **Preserve** |
+| Quick Start commands (`npm start`) | `package.json` now uses `pnpm dev` | **Upgrade command** |
+| Custom FAQ / Deployment notes | Valid operational context written by user | **Preserve** |
+| Deprecated env var `OLD_API_KEY` | Removed from `.env.example` & codebase | **Remove** |
+```
 
-Never discard valid custom screenshots, diagrams, deployment notes, or external links without confirming with the user first.
+### Update Strategies to Propose:
+1. **Preserve-and-upgrade (Recommended for custom docs)**: Keep valid custom sections, diagrams, and domain notes while updating stale commands, broken paths, and aligning formatting/ESL prose.
+2. **Replace cleanly**: Rebuild fresh documentation from current codebase facts (preserving local media paths if still relevant). Best for boilerplate or severely drifted READMEs.
+3. **Surgical update**: Modify only specific broken commands or outdated tables without touching surrounding text.
